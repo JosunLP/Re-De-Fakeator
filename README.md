@@ -1,20 +1,20 @@
-# BrowserExtensionTemplate
+# Re-De-Fakeator
 
-[![GitHub issues](https://img.shields.io/github/issues/JosunLP/BrowserExtensionTemplate?style=for-the-badge)](https://github.com/JosunLP/BrowserExtensionTemplate/issues)
-[![GitHub forks](https://img.shields.io/github/forks/JosunLP/BrowserExtensionTemplate?style=for-the-badge)](https://github.com/JosunLP/BrowserExtensionTemplate/network)
-[![GitHub stars](https://img.shields.io/github/stars/JosunLP/BrowserExtensionTemplate?style=for-the-badge)](https://github.com/JosunLP/BrowserExtensionTemplate/stargazers)
-[![GitHub license](https://img.shields.io/github/license/JosunLP/BrowserExtensionTemplate?style=for-the-badge)](https://github.com/JosunLP/BrowserExtensionTemplate)
-[![Twitter URL](https://img.shields.io/twitter/url?logo=twitter&style=for-the-badge&url=https%3A%2F%2Fgithub.com%2FJosunLP%2FBrowserExtensionTemplate)](https://twitter.com/intent/tweet?text=Look+what+i+found+on+GitHub+%23Developer%2C+%23SoftwareDeveloper%3A&url=https%3A%2F%2Fgithub.com%2FJosunLP%2FBrowserExtensionTemplate)
-[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/browserextensiontemplate/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/josunlp/browserextensiontemplate)
-[![Known Vulnerabilities](https://snyk.io/test/github/JosunLP/BrowserExtensionTemplate/badge.svg?style=for-the-badge)](https://snyk.io/test/github/JosunLP/BrowserExtensionTemplate)
+[![GitHub issues](https://img.shields.io/github/issues/JosunLP/Re-De-Fakeator?style=for-the-badge)](https://github.com/JosunLP/Re-De-Fakeator/issues)
+[![GitHub forks](https://img.shields.io/github/forks/JosunLP/Re-De-Fakeator?style=for-the-badge)](https://github.com/JosunLP/Re-De-Fakeator/network)
+[![GitHub stars](https://img.shields.io/github/stars/JosunLP/Re-De-Fakeator?style=for-the-badge)](https://github.com/JosunLP/Re-De-Fakeator/stargazers)
+[![GitHub license](https://img.shields.io/github/license/JosunLP/Re-De-Fakeator?style=for-the-badge)](https://github.com/JosunLP/Re-De-Fakeator)
+[![Twitter URL](https://img.shields.io/twitter/url?logo=twitter&style=for-the-badge&url=https%3A%2F%2Fgithub.com%2FJosunLP%2FRe-De-Fakeator)](https://twitter.com/intent/tweet?text=Look+what+i+found+on+GitHub+%23Developer%2C+%23SoftwareDeveloper%3A&url=https%3A%2F%2Fgithub.com%2FJosunLP%2FRe-De-Fakeator)
+[![CodeFactor](https://www.codefactor.io/repository/github/josunlp/Re-De-Fakeator/badge?style=for-the-badge)](https://www.codefactor.io/repository/github/josunlp/Re-De-Fakeator)
+[![Known Vulnerabilities](https://snyk.io/test/github/JosunLP/Re-De-Fakeator/badge.svg?style=for-the-badge)](https://snyk.io/test/github/JosunLP/Re-De-Fakeator)
 
 ## Description
 
-A basic template based on SASS and TypeScript to create browser extensions without directly relying on a larger framework.
+Der Re-De-Fakeator bringt automatisch wahre Fakten über Rechtspopulisten in deinen Browser. Schluss mit den weichgespülten Konformitätsmeinungen, jetzt kommen die harten Fakten! Die Erweiterung basiert auf dem De-Fakeator, den das Neomagazin Royale am 01.04.2017 veröffentlichte. Original: https://www.zdf.de/comedy/neo-magazin-mit-jan-boehmermann/de-fakeator-100.html
 
 ## Installation
 
-You can download the source code from [GitHub](https://github.com/JosunLP/BrowserExtensionTemplate). Just copy it in your project and run `npm install` to install the dependencies.
+You can download the source code from [GitHub](https://github.com/JosunLP/Re-De-Fakeator). Just copy it in your project and run `npm install` to install the dependencies.
 The basic configuration, wich will sync with `npm run sync` with the `package.json` file and the `manifest.json` file, is in `app.config.json`.
 Alternatively, you can fork the project and run `npm install` in the forked project.
 
