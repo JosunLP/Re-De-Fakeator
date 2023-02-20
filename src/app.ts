@@ -1,10 +1,12 @@
 import { Session } from "./classes/session"
+import { ComponentService } from "./services/component.srvs"
 
 class App {
 
     private static contentEntry: string = "content"
 
     constructor() {
+		ComponentService.getInstance()
         this.drawData()
         this.main()
     }
