@@ -22,87 +22,12 @@ class Settings {
 	private async renderSettings(): Promise<void> {
 		const settings = <HTMLDivElement>document.getElementById("settings");
 		settings.innerHTML = "";
-		const saveButton = new BasicButton(
-			"success",
-			"Save",
-			"saveSettings"
-		).render();
 
-		const addNewPOI = document.createElement("div");
-		addNewPOI.id = "addNewPOI";
-		addNewPOI.classList.add("addNewPOI");
-
-		const addNewPOIName = document.createElement("input");
-		addNewPOIName.type = "text";
-		addNewPOIName.id = "addNewPOIName";
-		addNewPOIName.classList.add("addNewPOIName");
-
-		const addNewPOINameLabel = document.createElement("label");
-		addNewPOINameLabel.innerText = "Name";
-		addNewPOINameLabel.htmlFor = "addNewPOIName";
-
-		const addNewPOINameVarList = document.createElement("ul");
-		addNewPOINameVarList.id = "addNewPOINameVarList";
-		addNewPOINameVarList.classList.add("addNewPOINameVarList");
-
-		const addNewPOINameVar = document.createElement("input");
-		addNewPOINameVar.type = "text";
-		addNewPOINameVar.id = "addNewPOINameVar";
-		addNewPOINameVar.classList.add("addNewPOINameVar");
-
-		const addNewPOINameVarLabel = document.createElement("label");
-		addNewPOINameVarLabel.innerText = "Variable";
-		addNewPOINameVarLabel.htmlFor = "addNewPOINameVar";
-
-		const addNewPOINameVarAdd = new BasicButton(
-			"primary",
-			"Add",
-			"addNewPOINameVarAdd"
-		).render();
-
-		const addNewPOIDescriptionList = document.createElement("ul");
-		addNewPOIDescriptionList.id = "addNewPOIDescriptionList";
-		addNewPOIDescriptionList.classList.add("addNewPOIDescriptionList");
-
-		const addNewPOIDescription = document.createElement("input");
-		addNewPOIDescription.type = "text";
-		addNewPOIDescription.id = "addNewPOIDescription";
-		addNewPOIDescription.classList.add("addNewPOIDescription");
-
-		const addNewPOIDescriptionLabel = document.createElement("label");
-		addNewPOIDescriptionLabel.innerText = "Description";
-		addNewPOIDescriptionLabel.htmlFor = "addNewPOIDescription";
-
-		const addNewPOIDescriptionAdd = new BasicButton(
-			"primary",
-			"Add",
-			"addNewPOIDescriptionAdd"
-		).render();
-
-		const addNewPOIButton = new BasicButton(
-			"primary",
-			"Add",
-			"addNewPOIButton"
-		).render();
-
-		addNewPOI.appendChild(addNewPOINameLabel);
-		addNewPOI.appendChild(addNewPOIName);
-		addNewPOI.appendChild(addNewPOINameVarLabel);
-		addNewPOI.appendChild(addNewPOINameVar);
-		addNewPOI.appendChild(addNewPOINameVarAdd);
-		addNewPOI.appendChild(addNewPOINameVarList);
-		addNewPOI.appendChild(addNewPOIDescriptionLabel);
-		addNewPOI.appendChild(addNewPOIDescription);
-		addNewPOI.appendChild(addNewPOIDescriptionAdd);
-		addNewPOI.appendChild(addNewPOIDescriptionList);
-		addNewPOI.appendChild(addNewPOIButton);
-
-		const poiList = document.createElement("ul");
+		const poiList = document.createElement("poi-list");
 		poiList.id = "poiList";
-		poiList.classList.add("poiList");
 
-		const poiListTitle = document.createElement("h2");
-		poiListTitle.innerText = "POIs";
+		const addNewPOI = document.createElement("poi-add-new");
+		addNewPOI.id = "addNewPOI";
 
 		this.poiHandler.getPOIs().forEach((element) => {
 			this.renderPOI(element).then((poi) => {
@@ -110,11 +35,8 @@ class Settings {
 			});
 		});
 
-		settings.appendChild(poiListTitle);
 		settings.appendChild(poiList);
 		settings.appendChild(addNewPOI);
-
-		settings.appendChild(saveButton);
 	}
 
 	private async renderPOI(poi: POI): Promise<HTMLDivElement> {

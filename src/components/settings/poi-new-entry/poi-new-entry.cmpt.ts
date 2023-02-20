@@ -1,5 +1,5 @@
-export class PoiNew extends HTMLDivElement {
-	private template = fetch("./poi-new.cmpt.html").then((response) =>
+export class PoiNewEntry extends HTMLDivElement {
+	private template = fetch("./poi-new-entry.cmpt.html").then((response) =>
 		response.text()
 	);
 
