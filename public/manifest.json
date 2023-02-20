@@ -1,8 +1,8 @@
 {
-  "name": "Browser Extension Template",
+  "name": "Re-De-Fakeator",
   "version": "0.0.1",
   "manifest_version": 3,
-  "description": "A basic template based on SASS and TypeScript to create browser extensions without directly relying on a larger framework.",
+  "description": "Der Re-De-Fakeator bringt automatisch wahre Fakten über Rechtspopulisten in deinen Browser. Schluss mit den weichgespülten Konformitätsmeinungen, jetzt kommen die harten Fakten! Die Erweiterung basiert auf dem De-Fakeator, den das Neomagazin Royale am 01.04.2017 veröffentlichte.",
   "homepage_url": "https://github.com/JosunLP/BrowserExtensionTemplate",
   "icons": {
     "16": "icons/icon16.png",
