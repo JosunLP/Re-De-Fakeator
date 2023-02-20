@@ -1,6 +1,10 @@
+import { RunntimeConfig } from "../types/runntimeConfig";
+
 export class Session {
 
     private static instance: Session;
+
+	public config: RunntimeConfig | null = null;
 
     private constructor() {
     }

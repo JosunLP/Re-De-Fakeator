@@ -17,7 +17,7 @@ export class BasicButton {
         this.className = className;
     }
 
-    public render(): string {
+    public render(): HTMLButtonElement {
         const result = document.createElement('button');
         result.type = "button";
         result.className = this.type;
@@ -57,7 +57,7 @@ export class BasicButton {
             result.className += ' ' + this.className;
         }
 
-        return result.outerHTML;
+        return result;
     }
 
 }
