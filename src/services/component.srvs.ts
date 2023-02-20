@@ -1,4 +1,4 @@
-import { PoiNew } from "../components/settings/poi-add-new/poi-new.cmpt";
+import { PoiNew } from "../components/settings/poi-new/poi-new.cmpt";
 import { PoiList } from "../components/settings/poi-list/poi-list.cmpt";
 import { PoiNewEntry } from "../components/settings/poi-new-entry/poi-new-entry.cmpt";
 

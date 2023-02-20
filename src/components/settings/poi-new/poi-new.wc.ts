@@ -1,5 +1,5 @@
-export class PoiList extends HTMLDivElement {
-	private template = fetch("./poi-list.cmpt.html").then((response) =>
+export class PoiNew extends HTMLElement {
+	private template = fetch("./templates/poi-new.cmpt.html").then((response) =>
 		response.text()
 	);
 
@@ -9,7 +9,7 @@ export class PoiList extends HTMLDivElement {
 		super();
 		this.template.then((template) => {
 			const t = new DOMParser().parseFromString(template, "text/html");
-			this.shadowRoot.appendChild(t.cloneNode(true));
+			this.shadowRoot.appendChild(t.documentElement);
 		});
 	}
 }

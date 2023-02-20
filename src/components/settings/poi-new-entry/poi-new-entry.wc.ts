@@ -1,6 +1,6 @@
-export class PoiNewEntry extends HTMLDivElement {
-	private template = fetch("./poi-new-entry.cmpt.html").then((response) =>
-		response.text()
+export class PoiNewEntry extends HTMLElement {
+	private template = fetch("./templates/poi-new-entry.cmpt.html").then(
+		(response) => response.text()
 	);
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
@@ -9,7 +9,7 @@ export class PoiNewEntry extends HTMLDivElement {
 		super();
 		this.template.then((template) => {
 			const t = new DOMParser().parseFromString(template, "text/html");
-			this.shadowRoot.appendChild(t.cloneNode(true));
+			this.shadowRoot.appendChild(t.documentElement);
 		});
 	}
 }
