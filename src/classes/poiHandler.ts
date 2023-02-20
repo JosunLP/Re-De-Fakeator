@@ -1,10 +1,12 @@
 import { POI } from "../types/poi";
-import { ConfigLoader } from "./configLoader";
+import { Session } from "./session";
 
 export class POIHandler {
 	private static instance: POIHandler;
 
 	private constructor() {}
+
+	private session = Session.getInstance();
 
 	public static getInstance() {
 		if (!POIHandler.instance) {
@@ -13,14 +15,12 @@ export class POIHandler {
 		return POIHandler.instance;
 	}
 
-	private config = ConfigLoader.getInstance().getConfig();
-
-	public getPOI(): POI[] {
-		return this.config?.POIs || [];
+	public getPOIs(): POI[] {
+		return this.session.config.POIs;
 	}
 
 	public getPOIById(id: string): POI | null {
-		const POIs = this.getPOI();
+		const POIs = this.getPOIs();
 		for (let i = 0; i < POIs.length; i++) {
 			if (POIs[i].id === id) {
 				return POIs[i];
@@ -30,37 +30,35 @@ export class POIHandler {
 	}
 
 	public setPOI(POIs: POI[]) {
-		const config = ConfigLoader.getInstance().getConfig();
+		const config = this.session.config;
 		if (config) {
-			config.POIs = POIs;
-			ConfigLoader.getInstance().setConfig(config);
+			this.session.config.POIs = POIs;
 		}
 	}
 
 	public addPOI(POI: POI) {
-		const config = ConfigLoader.getInstance().getConfig();
+		const config = this.session.config;
 		if (config) {
-			config.POIs.push(POI);
-			ConfigLoader.getInstance().setConfig(config);
+			this.session.config.POIs.push(POI);
 		}
 	}
 
 	public removePOI(id: string) {
-		const config = ConfigLoader.getInstance().getConfig();
+		const config = this.session.config;
 		if (config) {
-			const POIs = config.POIs;
+			const POIs = this.session.config.POIs;
 			for (let i = 0; i < POIs.length; i++) {
 				if (POIs[i].id === id) {
 					POIs.splice(i, 1);
 					break;
 				}
 			}
-			ConfigLoader.getInstance().setConfig(config);
+			this.session.config.POIs = POIs;
 		}
 	}
 
 	public updatePOI(POI: POI) {
-		const config = ConfigLoader.getInstance().getConfig();
+		const config = this.session.config;
 		if (config) {
 			const POIs = config.POIs;
 			for (let i = 0; i < POIs.length; i++) {
@@ -69,7 +67,7 @@ export class POIHandler {
 					break;
 				}
 			}
-			ConfigLoader.getInstance().setConfig(config);
+			this.session.config.POIs = POIs;
 		}
 	}
 }

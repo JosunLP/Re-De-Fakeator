@@ -13,6 +13,7 @@ class Settings {
 		this.addCreateNewPOIListener();
 		this.addNewPOINameVarListener();
 		this.addNewPOIDescriptionVarListener();
+		this.addDeleteNewPOINamesListener();
 	}
 
 	private async renderSettings(): Promise<void> {
@@ -100,35 +101,26 @@ class Settings {
 		const poiListTitle = document.createElement("h2");
 		poiListTitle.innerText = "POIs";
 
-		this.poiHandler.getPOI().forEach((element) => {
+		this.poiHandler.getPOIs().forEach((element) => {
 			this.renderPOI(element).then((poi) => {
 				poiList.appendChild(poi);
 			});
 		});
-
-		const saveSettings = <HTMLButtonElement>(
-			document.getElementById("saveSettings")
-		);
 
 		settings.appendChild(poiListTitle);
 		settings.appendChild(poiList);
 		settings.appendChild(addNewPOI);
 
 		settings.appendChild(saveButton);
-
-		saveSettings.addEventListener("click", () => {
-			this.session.contentTest = (<HTMLInputElement>(
-				document.getElementById("contentTest")
-			)).value;
-			Session.save();
-			Session.reloadSession();
-		});
 	}
 
 	private async renderPOI(poi: POI): Promise<HTMLDivElement> {
 		const poiElement = document.createElement("div");
 		poiElement.id = poi.id;
 		poiElement.classList.add("poi");
+
+		const poinNameWrapper = document.createElement("div");
+		poinNameWrapper.classList.add("poiNameWrapper");
 
 		const poiName = document.createElement("input");
 		poiName.type = "text";
@@ -139,6 +131,9 @@ class Settings {
 		const poiLabel = document.createElement("label");
 		poiLabel.innerText = "Name";
 		poiLabel.htmlFor = poi.id + "_name";
+
+		poinNameWrapper.appendChild(poiLabel);
+		poinNameWrapper.appendChild(poiName);
 
 		const nameVarList = document.createElement("ul");
 		nameVarList.id = poi.id + "_nameVarList";
@@ -170,15 +165,14 @@ class Settings {
 			poiDesctiontionVarList.appendChild(descriptionVar);
 		});
 
-		poiElement.appendChild(poiName);
-		poiElement.appendChild(poiLabel);
+		poiElement.appendChild(poinNameWrapper);
 		poiElement.appendChild(nameVarList);
 		poiElement.appendChild(poiDesctiontionVarList);
 
 		return poiElement;
 	}
 
-	private async renderListEntry(listEntry: string) {
+	private async renderListEntry(listEntry: string): Promise<HTMLLIElement> {
 		const listEntryElement = document.createElement("li");
 		listEntryElement.innerText = listEntry;
 
@@ -252,28 +246,37 @@ class Settings {
 				this.renderListEntry(addNewPOINameVar.value).then((element) => {
 					addNewPOINameVarList.appendChild(element);
 				});
-				this.renderSettings();
 			});
+	}
+
+	private async addDeleteNewPOINamesListener(): Promise<void> {
+		const addNewPOINameVarList = document.getElementById(
+			"addNewPOINameVarList"
+		) as HTMLUListElement;
+
+		addNewPOINameVarList.childNodes.forEach((element) => {
+			element.childNodes[1].addEventListener("click", () => {
+				element.remove();
+			});
+		});
 	}
 
 	private async addNewPOIDescriptionVarListener(): Promise<void> {
 		const addNewPOIDescriptionVar = document.getElementById(
-			"addNewPOIDescriptionVar"
+			"addNewPOIDescription"
 		) as HTMLInputElement;
 		const addNewPOIDescriptionVarList = document.getElementById(
 			"addNewPOIDescriptionList"
 		) as HTMLUListElement;
 
 		document
-			.getElementById("addNewPOIDescriptionVarAdd")!
+			.getElementById("addNewPOIDescriptionAdd")!
 			.addEventListener("click", () => {
 				this.renderListEntry(addNewPOIDescriptionVar.value).then(
 					(element) => {
 						addNewPOIDescriptionVarList.appendChild(element);
 					}
 				);
-
-				this.renderSettings();
 			});
 	}
 }

@@ -20,7 +20,6 @@ class App {
         const title = document.createElement("h1")
         const text = document.createElement("p")
         title.innerText = "Hello World"
-        text.innerText = session.contentTest
         body.appendChild(title)
         body.appendChild(text)
         contentRoot.appendChild(body)

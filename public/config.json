@@ -1,0 +1,36 @@
+{
+    "POIs": [
+        {
+            "id": "1",
+            "name": "Donald Trump",
+            "nameVariations": [
+                "Donald J. Trump",
+                "Donald John Trump",
+                "Donald Trump",
+                "DonaldTrump"
+            ],
+            "descriptionVariations": [
+                "bekannter Lügner und Rassist",
+                "hat die Welt in Gefahr gebracht",
+                "guter Freund von Putin"
+            ]
+        },
+        {
+            "id": "2",
+            "name": "J. K. Rowling",
+            "nameVariations": [
+                "Joanne K. Rowling",
+                "Joanne Kathleen Rowling",
+                "Joanne Rowling",
+                "J.K. Rowling",
+                "JK Rowling",
+                "Joanne Rowling",
+                "Rowling"
+            ],
+            "descriptionVariations": [
+                "hat sich mehrfach offen Transphob geäußert",
+                "ist eine TERF"
+            ]
+        }
+    ]
+}
