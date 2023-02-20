@@ -22,7 +22,7 @@ class Settings {
 		const poiList = document.createElement("poi-list");
 		poiList.id = "poiList";
 
-		const addNewPOI = document.createElement("poi-add-new");
+		const addNewPOI = document.createElement("poi-new");
 		addNewPOI.id = "addNewPOI";
 
 		settings.appendChild(poiList);

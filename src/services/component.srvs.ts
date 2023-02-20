@@ -1,6 +1,7 @@
-import { PoiNew } from "../components/settings/poi-new/poi-new.cmpt";
-import { PoiList } from "../components/settings/poi-list/poi-list.cmpt";
-import { PoiNewEntry } from "../components/settings/poi-new-entry/poi-new-entry.cmpt";
+import { PoiList } from "../components/settings/poi-list/poi-list.wc";
+import { PoiNewEntry } from "../components/settings/poi-new-entry/poi-new-entry.wc";
+import { PoiNew } from "../components/settings/poi-new/poi-new.wc";
+
 
 export class ComponentService {
 
