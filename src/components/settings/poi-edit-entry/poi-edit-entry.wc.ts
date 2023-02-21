@@ -11,7 +11,11 @@ export class PoiEditEntry extends HTMLElement implements WebComponent {
 		this.shadowRoot.appendChild(this.template);
 	}
 	connectedCallback(): void {
-		throw new Error("Method not implemented.");
+		this.render(
+			this.getAttribute("value")
+				? this.getAttribute("value")! as string
+				: "Name"
+		);
 	}
 	run(): void {
 		throw new Error("Method not implemented.");
@@ -19,13 +23,13 @@ export class PoiEditEntry extends HTMLElement implements WebComponent {
 	reset(): void {
 		throw new Error("Method not implemented.");
 	}
-	render(value: POI): void {
+	render(value: string): void {
 		this.template.className = "poi-edit-entry";
 		const span = document.createElement("span");
 		const button = document.createElement("button");
 
 		span.className = "poi-edit-entry__name";
-		span.innerText = value.name;
+		span.innerText = value;
 
 		button.classList.add("poi-edit-entry__delete-button");
 		button.classList.add("btn");

@@ -4,9 +4,9 @@ export interface WebComponent extends HTMLElement {
 
 	connectedCallback(): void;
 
-	run(): void;
+	run?(): void;
 
-	reset(): void;
+	reset?(): void;
 
 	render(value?: string | undefined | any): void;
 }

@@ -1,3 +1,4 @@
+import { PoiEditEntry } from './../components/settings/poi-edit-entry/poi-edit-entry.wc';
 import { PoiEdit } from "../components/settings/poi-edit/poi-edit.wc";
 import { PoiList } from "../components/settings/poi-list/poi-list.wc";
 import { PoiNewEntry } from "../components/settings/poi-new-entry/poi-new-entry.wc";
@@ -26,5 +27,6 @@ export class ComponentService {
 		customElements.define("poi-new-entry", PoiNewEntry);
 		customElements.define("menu-custom", MenuComponent);
 		customElements.define("poi-edit", PoiEdit);
+		customElements.define("poi-edit-entry", PoiEditEntry);
 	}
 }

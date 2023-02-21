@@ -6,21 +6,46 @@
 @import "../../node_modules/bootstrap/scss/bootstrap"
 
 body
-  height: 30rem
-  width: 30rem
+  min-height: 30rem
+  min-width: 30rem
   background-color: $background-color
-  text-align: center
+  text-align: left
   margin: auto
-  padding: 1rem
+  padding: 2rem
   color: $main-font-color
+
+  header
+    display: flex
+    align-items: center
+    justify-content: space-around
+    margin-bottom: 2rem
+
+    .logo
+      width: 5rem
+      height: auto
+      padding: 0
+      background-color: white
+      border-radius: 50%
+      @include noselect
+
+    h1
+      font-size: 2rem
+      font-weight: bold
+      margin: auto
+      color: $main-font-color
+      font-family: 'Roboto', sans-serif
+      margin-left: 2rem
+
+  &.app-settings
+    min-width: 100%
+    min-height: 100%
 
   p
     font-size: 1rem
     font-weight: bold
     margin: auto
-    padding: auto
+    padding: 2rem
     color: $main-font-color
-    text-align: center
     font-family: 'Roboto', sans-serif
 
 h1, h2

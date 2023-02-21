@@ -2,6 +2,7 @@ import { POIHandler } from "./../../../classes/poiHandler";
 import { POI } from "../../../types/poi.type";
 import { WebComponent } from "../../../interfaces/wc.interface";
 import { RouterService } from "../../../services/router.srvs";
+import { Helper } from "../../../classes/helper";
 
 export class PoiList extends HTMLElement implements WebComponent {
 	router = RouterService.getInstance();
@@ -21,7 +22,9 @@ export class PoiList extends HTMLElement implements WebComponent {
 	run() {
 		this.reset();
 		this.render();
-		this.fillList();
+		Helper.sleep(10).then(() => {
+			this.fillList();
+		});
 	}
 
 	reset(): void {
