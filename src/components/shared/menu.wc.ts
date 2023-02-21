@@ -1,7 +1,7 @@
 import { Helper } from "../../classes/helper";
 import { RouterService } from "../../services/router.srvs";
 import { MenuItem } from "../../types/menuItem.type";
-import { WebComponent } from "../interfaces/wc.interface";
+import { WebComponent } from "../../interfaces/wc.interface";
 
 export class MenuComponent extends HTMLElement implements WebComponent {
 	template = document.createElement("div");

@@ -1,7 +1,7 @@
 import { POIHandler } from "./../../../classes/poiHandler";
 import { POI } from "../../../types/poi.type";
 import { Helper } from "../../../classes/helper";
-import { WebComponent } from "../../interfaces/wc.interface";
+import { WebComponent } from "../../../interfaces/wc.interface";
 
 export class PoiList extends HTMLElement implements WebComponent {
 	template = document.createElement("div");

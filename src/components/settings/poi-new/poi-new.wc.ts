@@ -1,4 +1,4 @@
-import { WebComponent } from "../../interfaces/wc.interface";
+import { WebComponent } from "../../../interfaces/wc.interface";
 
 export class PoiNew extends HTMLElement implements WebComponent {
 	template = document.createElement("div");

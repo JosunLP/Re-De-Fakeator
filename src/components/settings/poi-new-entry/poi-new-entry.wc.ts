@@ -1,4 +1,4 @@
-import { WebComponent } from "../../interfaces/wc.interface";
+import { WebComponent } from "../../../interfaces/wc.interface";
 
 export class PoiNewEntry extends HTMLDataListElement implements WebComponent {
 	template = document.createElement("li");
