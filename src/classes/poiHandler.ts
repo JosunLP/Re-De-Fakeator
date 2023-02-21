@@ -29,7 +29,7 @@ export class POIHandler {
 		return null;
 	}
 
-	public setPOI(POIs: POI[]) {
+	public setPOIs(POIs: POI[]) {
 		const config = this.session.config;
 		if (config) {
 			this.session.config.POIs = POIs;
@@ -68,6 +68,28 @@ export class POIHandler {
 				}
 			}
 			this.session.config.POIs = POIs;
+		}
+	}
+
+	removeDescriptionVariation(value: POI, descriptionVariant: string) {
+		const POIs = this.getPOIs();
+		const POI = this.getPOIById(value.id);
+		if (POI) {
+			POI.descriptionVariations = POI.descriptionVariations.filter(
+				(description) => description !== descriptionVariant
+			);
+			this.setPOIs(POIs);
+		}
+	}
+
+	removeNameVariation(value: POI, nameVariant: string) {
+		const POIs = this.getPOIs();
+		const POI = this.getPOIById(value.id);
+		if (POI) {
+			POI.nameVariations = POI.nameVariations.filter(
+				(name) => name !== nameVariant
+			);
+			this.setPOIs(POIs);
 		}
 	}
 }

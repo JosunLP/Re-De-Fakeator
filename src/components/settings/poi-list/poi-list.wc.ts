@@ -1,27 +1,27 @@
 import { POIHandler } from "./../../../classes/poiHandler";
 import { POI } from "../../../types/poi.type";
-import { Helper } from "../../../classes/helper";
 import { WebComponent } from "../../../interfaces/wc.interface";
+import { RouterService } from "../../../services/router.srvs";
 
 export class PoiList extends HTMLElement implements WebComponent {
+	router = RouterService.getInstance();
 	template = document.createElement("div");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
 	constructor() {
 		super();
-		this.render();
 		this.shadowRoot.appendChild(this.template);
+	}
+
+	connectedCallback(): void {
 		this.run();
 	}
 
-	async run() {
-		while (true) {
-			this.reset();
-			this.render();
-			await this.fillList();
-			await Helper.sleep(1000);
-		}
+	run() {
+		this.reset();
+		this.render();
+		this.fillList();
 	}
 
 	reset(): void {
@@ -44,7 +44,7 @@ export class PoiList extends HTMLElement implements WebComponent {
 		this.template.appendChild(list);
 	}
 
-	private async fillList(): Promise<void> {
+	private fillList(): void {
 		const list = this.shadowRoot.querySelector(".poi-list__list");
 		if (list) {
 			list.innerHTML = "";
@@ -53,6 +53,9 @@ export class PoiList extends HTMLElement implements WebComponent {
 				const listItem = document.createElement("li");
 				listItem.classList.add("poi-list__item");
 				listItem.innerText = poi.name;
+				listItem.addEventListener("click", () => {
+					this.router.navigateTo("/edit-poi", poi);
+				});
 				list.appendChild(listItem);
 			});
 		}
@@ -60,9 +63,5 @@ export class PoiList extends HTMLElement implements WebComponent {
 
 	private getPoiList(): POI[] {
 		return POIHandler.getInstance().getPOIs();
-	}
-
-	connectedCallback(): void {
-		this.fillList();
 	}
 }

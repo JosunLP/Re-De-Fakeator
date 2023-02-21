@@ -1,4 +1,4 @@
 export type Route = {
 	  path: string;
-	  returnFunction: () => void;
+	  returnFunction: (value?: any) => void;
 	};

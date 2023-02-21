@@ -11,18 +11,17 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 
 	constructor() {
 		super();
-		this.render();
 		this.shadowRoot.appendChild(this.template);
+	}
+
+	connectedCallback() {
 		this.run();
 	}
 
-	async run() {
-		while (true) {
-			this.reset();
-			this.render();
-			await this.renderListItems();
-			await Helper.sleep(500);
-		}
+	run() {
+		this.reset();
+		this.render();
+		this.renderListItems();
 	}
 
 	reset(): void {
@@ -30,7 +29,7 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 		this.template.className = "";
 	}
 
-	async render() {
+	render() {
 		this.template.classList.add("menu");
 		const menuHeader = document.createElement("div");
 		const menuHeaderTitle = document.createElement("h2");
@@ -45,7 +44,7 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 		this.template.appendChild(list);
 	}
 
-	private async renderListItems() {
+	private renderListItems() {
 		const list = this.shadowRoot.querySelector(".menu__list");
 		if (list) {
 			list.innerHTML = "";

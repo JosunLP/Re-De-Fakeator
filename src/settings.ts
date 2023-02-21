@@ -3,6 +3,7 @@ import { Session } from "./classes/session";
 import { ComponentService } from "./services/component.srvs";
 import { RouterService } from "./services/router.srvs";
 import { MenuItem } from "./types/menuItem.type";
+import { POI } from "./types/poi.type";
 
 class Settings {
 	private session = Session.getInstance();
@@ -12,14 +13,18 @@ class Settings {
 	constructor() {
 		ComponentService.getInstance();
 
+		this.renderMenu();
 		this.routes();
 		this.router.navigateTo("/");
 	}
 
-	private async renderSettings(): Promise<void> {
+	private clearSettings(): void {
 		const settings = <HTMLDivElement>document.getElementById("settings");
 		settings.innerHTML = "";
+	}
 
+	private renderMenu(): void {
+		const app = <HTMLDivElement>document.getElementById("app");
 		const menu = document.createElement("menu-custom");
 		const menuItems: MenuItem[] = [
 			{
@@ -35,14 +40,14 @@ class Settings {
 
 		menu.setAttribute("menuItems", JSON.stringify(menuItems));
 
-		settings.appendChild(menu);
+		app.insertBefore(menu, document.getElementById("settings")!);
 	}
 
 	private routes(): void {
 		this.router.addRoute({
 			path: "/",
 			returnFunction: () => {
-				this.renderSettings();
+				this.clearSettings();
 				const poiList = document.createElement("poi-list");
 				poiList.id = "poiList";
 				<HTMLDivElement>(
@@ -51,13 +56,14 @@ class Settings {
 			},
 		});
 		this.router.addRoute({
-			path: "/add-poi",
-			returnFunction: () => {
-				this.renderSettings();
-				const poiForm = document.createElement("poi-form");
-				poiForm.id = "poiForm";
+			path: "/edit-poi",
+			returnFunction: (value: POI) => {
+				this.clearSettings();
+				const poiEdit = document.createElement("poi-edit");
+				poiEdit.setAttribute("value", JSON.stringify(value));
+				poiEdit.id = "poiForm";
 				<HTMLDivElement>(
-					document.getElementById("settings")!.appendChild(poiForm)
+					document.getElementById("settings")!.appendChild(poiEdit)
 				);
 			},
 		});

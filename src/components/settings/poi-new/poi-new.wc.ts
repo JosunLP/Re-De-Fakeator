@@ -7,8 +7,11 @@ export class PoiNew extends HTMLElement implements WebComponent {
 
 	constructor() {
 		super();
-		this.render();
 		this.shadowRoot.appendChild(this.template);
+	}
+
+	connectedCallback(): void {
+		this.run();
 	}
 
 	run(): void {

@@ -7,10 +7,13 @@ export class PoiNewEntry extends HTMLDataListElement implements WebComponent {
 
 	constructor() {
 		super();
+		this.shadowRoot.appendChild(this.template);
+	}
+
+	connectedCallback(): void {
 		this.render(
 			this.getAttribute("value") ? this.getAttribute("value")! : "Name"
 		);
-		this.shadowRoot.appendChild(this.template);
 	}
 
 	run(): void {
