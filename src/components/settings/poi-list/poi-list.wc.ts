@@ -1,9 +1,10 @@
 import { POIHandler } from "./../../../classes/poiHandler";
 import { POI } from "../../../types/poi.type";
 import { Helper } from "../../../classes/helper";
+import { WebComponent } from "../../interfaces/wc.interface";
 
-export class PoiList extends HTMLElement {
-	private template = document.createElement("div");
+export class PoiList extends HTMLElement implements WebComponent {
+	template = document.createElement("div");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -14,14 +15,21 @@ export class PoiList extends HTMLElement {
 		this.run();
 	}
 
-	private async run(): Promise<void> {
+	async run() {
 		while (true) {
+			this.reset();
+			this.render();
 			await this.fillList();
-			await Helper.sleep(300);
+			await Helper.sleep(1000);
 		}
 	}
 
-	private render(): void {
+	reset(): void {
+		this.template.innerHTML = "";
+		this.template.className = "";
+	}
+
+	render(): void {
 		this.template.classList.add("poi-list");
 		const listHeader = document.createElement("div");
 		const listHeaderTitle = document.createElement("h2");

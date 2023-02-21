@@ -1,5 +1,7 @@
-export class PoiNewEntry extends HTMLDataListElement {
-	private template = document.createElement("li");
+import { WebComponent } from "../../interfaces/wc.interface";
+
+export class PoiNewEntry extends HTMLDataListElement implements WebComponent {
+	template = document.createElement("li");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -11,7 +13,14 @@ export class PoiNewEntry extends HTMLDataListElement {
 		this.shadowRoot.appendChild(this.template);
 	}
 
-	private render(value: string): void {
+	run(): void {
+		throw new Error("Method not implemented.");
+	}
+	reset(): void {
+		throw new Error("Method not implemented.");
+	}
+
+	render(value: string): void {
 		this.template.className = "poi-new__entry";
 		const input = document.createElement("input");
 		const buttonRemove = document.createElement("button");

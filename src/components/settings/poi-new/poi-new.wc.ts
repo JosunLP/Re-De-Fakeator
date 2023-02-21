@@ -1,5 +1,7 @@
-export class PoiNew extends HTMLElement {
-	private template = document.createElement("div");
+import { WebComponent } from "../../interfaces/wc.interface";
+
+export class PoiNew extends HTMLElement implements WebComponent {
+	template = document.createElement("div");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -9,7 +11,14 @@ export class PoiNew extends HTMLElement {
 		this.shadowRoot.appendChild(this.template);
 	}
 
-	private render(): void {
+	run(): void {
+		throw new Error("Method not implemented.");
+	}
+	reset(): void {
+		throw new Error("Method not implemented.");
+	}
+
+	render(): void {
 		this.template.className = "poi-new";
 		const header = document.createElement("div");
 		const headerTitle = document.createElement("h2");

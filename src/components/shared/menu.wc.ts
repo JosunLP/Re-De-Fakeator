@@ -1,10 +1,10 @@
 import { Helper } from "../../classes/helper";
 import { RouterService } from "../../services/router.srvs";
 import { MenuItem } from "../../types/menuItem.type";
+import { WebComponent } from "../interfaces/wc.interface";
 
-export class MenuComponent extends HTMLElement {
-
-	private template = document.createElement("div");
+export class MenuComponent extends HTMLElement implements WebComponent {
+	template = document.createElement("div");
 	private router = RouterService.getInstance();
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
@@ -15,13 +15,22 @@ export class MenuComponent extends HTMLElement {
 		this.shadowRoot.appendChild(this.template);
 		this.run();
 	}
-	private async run() {
+
+	async run() {
 		while (true) {
+			this.reset();
+			this.render();
 			await this.renderListItems();
-			await Helper.sleep(300);
+			await Helper.sleep(500);
 		}
 	}
-	private async render() {
+
+	reset(): void {
+		this.template.innerHTML = "";
+		this.template.className = "";
+	}
+
+	async render() {
 		this.template.classList.add("menu");
 		const menuHeader = document.createElement("div");
 		const menuHeaderTitle = document.createElement("h2");
@@ -54,6 +63,7 @@ export class MenuComponent extends HTMLElement {
 			});
 		}
 	}
+
 	private getMenuItems(): MenuItem[] {
 		return JSON.parse(this.getAttribute("menuItems") || "[]");
 	}
