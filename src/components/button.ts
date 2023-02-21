@@ -1,4 +1,4 @@
-import { customButton } from "../types/buttonType";
+import { customButton } from "../types/buttonType.type";
 
 export class BasicButton {
 

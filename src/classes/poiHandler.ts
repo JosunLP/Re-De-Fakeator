@@ -1,4 +1,4 @@
-import { POI } from "../types/poi";
+import { POI } from "../types/poi.type";
 import { Session } from "./session";
 
 export class POIHandler {

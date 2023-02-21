@@ -1,32 +1,66 @@
 import { POIHandler } from "./classes/poiHandler";
 import { Session } from "./classes/session";
-import { BasicButton } from "./components/button";
 import { ComponentService } from "./services/component.srvs";
-import { POI } from "./types/poi";
+import { RouterService } from "./services/router.srvs";
+import { MenuItem } from "./types/menuItem.type";
 
 class Settings {
 	private session = Session.getInstance();
-
 	private poiHandler = POIHandler.getInstance();
+	private router = RouterService.getInstance();
 
 	constructor() {
 		ComponentService.getInstance();
 
-		this.renderSettings();
+		this.routes();
+		this.router.navigateTo("/");
 	}
 
 	private async renderSettings(): Promise<void> {
 		const settings = <HTMLDivElement>document.getElementById("settings");
 		settings.innerHTML = "";
 
-		const poiList = document.createElement("poi-list");
-		poiList.id = "poiList";
+		const menu = document.createElement("menu-custom");
+		const menuItems: MenuItem[] = [
+			{
+				name: "List View",
+				link: "/",
+			},
+			{
+				name: "Add POI",
+				link: "/add-poi",
+			},
+		];
+		menu.id = "menu";
 
-		const addNewPOI = document.createElement("poi-new");
-		addNewPOI.id = "addNewPOI";
+		menu.setAttribute("menuItems", JSON.stringify(menuItems));
 
-		settings.appendChild(poiList);
-		settings.appendChild(addNewPOI);
+		settings.appendChild(menu);
+	}
+
+	private routes(): void {
+		this.router.addRoute({
+			path: "/",
+			returnFunction: () => {
+				this.renderSettings();
+				const poiList = document.createElement("poi-list");
+				poiList.id = "poiList";
+				<HTMLDivElement>(
+					document.getElementById("settings")!.appendChild(poiList)
+				);
+			},
+		});
+		this.router.addRoute({
+			path: "/add-poi",
+			returnFunction: () => {
+				this.renderSettings();
+				const poiForm = document.createElement("poi-form");
+				poiForm.id = "poiForm";
+				<HTMLDivElement>(
+					document.getElementById("settings")!.appendChild(poiForm)
+				);
+			},
+		});
 	}
 }
 

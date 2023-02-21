@@ -1,4 +1,4 @@
-import { RunntimeConfig } from "../types/runntimeConfig";
+import { RunntimeConfig } from "../types/runntimeConfig.type";
 import { FileHandler } from "./fileHandler";
 
 export class Session {

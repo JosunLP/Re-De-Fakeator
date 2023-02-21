@@ -1,3 +1,7 @@
+import { POIHandler } from "./../../../classes/poiHandler";
+import { POI } from "../../../types/poi.type";
+import { Helper } from "../../../classes/helper";
+
 export class PoiList extends HTMLElement {
 	private template = document.createElement("div");
 
@@ -7,6 +11,14 @@ export class PoiList extends HTMLElement {
 		super();
 		this.render();
 		this.shadowRoot.appendChild(this.template);
+		this.run();
+	}
+
+	private async run(): Promise<void> {
+		while (true) {
+			await this.fillList();
+			await Helper.sleep(300);
+		}
 	}
 
 	private render(): void {
@@ -22,5 +34,27 @@ export class PoiList extends HTMLElement {
 		const list = document.createElement("ul");
 		list.classList.add("poi-list__list");
 		this.template.appendChild(list);
+	}
+
+	private async fillList(): Promise<void> {
+		const list = this.shadowRoot.querySelector(".poi-list__list");
+		if (list) {
+			list.innerHTML = "";
+			const poiList = this.getPoiList();
+			poiList.forEach((poi) => {
+				const listItem = document.createElement("li");
+				listItem.classList.add("poi-list__item");
+				listItem.innerText = poi.name;
+				list.appendChild(listItem);
+			});
+		}
+	}
+
+	private getPoiList(): POI[] {
+		return POIHandler.getInstance().getPOIs();
+	}
+
+	connectedCallback(): void {
+		this.fillList();
 	}
 }
