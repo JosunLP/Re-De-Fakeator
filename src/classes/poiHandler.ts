@@ -35,6 +35,7 @@ export class POIHandler {
 			this.session.config.POIs = POIs;
 		}
 		Session.save();
+		Session.load();
 	}
 
 	public addPOI(POI: POI) {
@@ -43,6 +44,7 @@ export class POIHandler {
 			this.session.config.POIs.push(POI);
 		}
 		Session.save();
+		Session.load();
 	}
 
 	public removePOI(id: string) {
@@ -58,6 +60,7 @@ export class POIHandler {
 			this.session.config.POIs = POIs;
 		}
 		Session.save();
+		Session.load();
 	}
 
 	public updatePOI(POI: POI) {
@@ -73,6 +76,16 @@ export class POIHandler {
 			this.session.config.POIs = POIs;
 		}
 		Session.save();
+		Session.load();
+	}
+
+	public createPOI(): POI {
+		return {
+			id: crypto.randomUUID(),
+			name: "",
+			nameVariations: [],
+			descriptionVariations: [],
+		};
 	}
 
 	removeDescriptionVariation(value: POI, descriptionVariant: string) {
@@ -85,6 +98,7 @@ export class POIHandler {
 			this.setPOIs(POIs);
 		}
 		Session.save();
+		Session.load();
 	}
 
 	removeNameVariation(value: POI, nameVariant: string) {
@@ -97,5 +111,6 @@ export class POIHandler {
 			this.setPOIs(POIs);
 		}
 		Session.save();
+		Session.load();
 	}
 }

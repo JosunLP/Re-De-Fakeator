@@ -61,7 +61,7 @@
     &:active
       background-color: $background-color-content-active
 
-.poi-edit
+.poi-edit, .poi-new
 
   input
     width: 100%
@@ -107,16 +107,7 @@
     label
       margin-right: 0.5rem
 
-  &__name-variants-new
-    &::after
-      @include smalUnderline()
-  &__name-variants-edit-list
-    &::after
-      @include smalUnderline()
-  &__description-variants-edit
-    &::after
-      @include smalUnderline()
-  &__description-variants-new
+  &__name-variants-new, &__name-variants-edit-list, &__description-variants-edit, &__description-variants-new, &__row
     &::after
       @include smalUnderline()
 

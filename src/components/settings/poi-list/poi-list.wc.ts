@@ -65,7 +65,7 @@ export class PoiList extends HTMLElement implements WebComponent {
 				listItem.classList.add("poi-list__item");
 				listItem.innerText = poi.name;
 				listItem.addEventListener("click", () => {
-					this.router.navigateTo("/edit-poi", poi);
+					this.router.navigate("/edit-poi", poi);
 				});
 				list.appendChild(listItem);
 			});

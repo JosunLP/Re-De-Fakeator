@@ -63,7 +63,7 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 			menuItems.forEach((menuItem: MenuItem) => {
 				const listItem = document.createElement("button");
 				listItem.addEventListener("click", () => {
-					this.router.navigateTo(menuItem.link);
+					this.router.navigate(menuItem.link);
 				});
 				listItem.classList.add("menu__item");
 				listItem.classList.add("menu__item--link");

@@ -15,7 +15,7 @@ class Settings {
 
 		this.renderMenu();
 		this.routes();
-		this.router.navigateTo("/");
+		this.router.navigate("/");
 	}
 
 	private clearSettings(): void {
@@ -32,7 +32,7 @@ class Settings {
 				link: "/",
 			},
 			{
-				name: "Add POI",
+				name: "Add Person of Interest",
 				link: "/add-poi",
 			},
 		];

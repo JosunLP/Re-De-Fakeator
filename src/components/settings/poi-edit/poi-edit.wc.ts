@@ -1,8 +1,8 @@
-import { POIHandler } from './../../../classes/poiHandler';
-import { POI } from './../../../types/poi.type';
+import { POIHandler } from "./../../../classes/poiHandler";
+import { POI } from "./../../../types/poi.type";
 import { WebComponent } from "../../../interfaces/wc.interface";
-import { RouterService } from '../../../services/router.srvs';
-import { Helper } from '../../../classes/helper';
+import { RouterService } from "../../../services/router.srvs";
+import { Helper } from "../../../classes/helper";
 
 export class PoiEdit extends HTMLElement implements WebComponent {
 	poiHandler = POIHandler.getInstance();
@@ -22,9 +22,11 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 	connectedCallback(): void {
 		this.render(JSON.parse(this.getAttribute("value")!) as POI);
 		this.renderStyle();
-		this.shadowRoot.querySelector(".poi-edit__name-edit-input")!.addEventListener("input", (e) => {
-			this.poi!.name = (e.target as HTMLInputElement).value;
-		});
+		this.shadowRoot
+			.querySelector(".poi-edit__name-edit-input")!
+			.addEventListener("input", (e) => {
+				this.poi!.name = (e.target as HTMLInputElement).value;
+			});
 		Helper.sleep(10).then(() => {
 			this.fillNameVariantsEditList();
 			this.fillDescriptionVariantsEditList();
@@ -36,7 +38,6 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		this.link.setAttribute("href", "./css/app.css");
 		this.shadowRoot.appendChild(this.link);
 	}
-
 
 	render(value: POI): void {
 		this.poi = value;
@@ -116,10 +117,13 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		const descriptionVariantsEditLabel = document.createElement("label");
 		const descriptionVariantsEditList = document.createElement("ul");
 
-		descriptionVariantsEdit.className = "poi-edit__description-variants-edit";
-		descriptionVariantsEditLabel.className = "poi-edit__description-variants-edit-label";
+		descriptionVariantsEdit.className =
+			"poi-edit__description-variants-edit";
+		descriptionVariantsEditLabel.className =
+			"poi-edit__description-variants-edit-label";
 		descriptionVariantsEditLabel.innerText = "Description Variants";
-		descriptionVariantsEditList.className = "poi-edit__description-variants-edit-list";
+		descriptionVariantsEditList.className =
+			"poi-edit__description-variants-edit-list";
 
 		descriptionVariantsEdit.appendChild(descriptionVariantsEditLabel);
 		descriptionVariantsEdit.appendChild(descriptionVariantsEditList);
@@ -131,12 +135,15 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		const descriptionVariantsNewButton = document.createElement("button");
 
 		descriptionVariantsNew.className = "poi-edit__description-variants-new";
-		descriptionVariantsNewLabel.className = "poi-edit__description-variants-new-label";
+		descriptionVariantsNewLabel.className =
+			"poi-edit__description-variants-new-label";
 		descriptionVariantsNewLabel.innerText = "Add Description Variant";
-		descriptionVariantsNewInput.className = "poi-edit__description-variants-new-input";
+		descriptionVariantsNewInput.className =
+			"poi-edit__description-variants-new-input";
 		descriptionVariantsNewInput.type = "text";
 		descriptionVariantsNewInput.classList.add("form-control");
-		descriptionVariantsNewButton.className = "poi-edit__description-variants-new-button";
+		descriptionVariantsNewButton.className =
+			"poi-edit__description-variants-new-button";
 		descriptionVariantsNewButton.innerText = "Add";
 		descriptionVariantsNewButton.classList.add("btn");
 		descriptionVariantsNewButton.classList.add("btn-outline-success");
@@ -167,7 +174,7 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 
 		deletePoibutton.addEventListener("click", () => {
 			this.poiHandler.removePOI(value.id);
-			this.router.navigateTo("/");
+			this.router.navigate("/");
 		});
 
 		const savePoibutton = document.createElement("button");
@@ -179,7 +186,7 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		savePoibutton.addEventListener("click", () => {
 			this.poi!.name = nameEditInput.value;
 			this.poiHandler.updatePOI(this.poi!);
-			this.router.navigateTo("/");
+			this.router.navigate("/");
 		});
 
 		poiEditFooter.appendChild(deletePoibutton);
@@ -198,12 +205,14 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		);
 		nameVariantsEditList!.innerHTML = "";
 		this.poi?.nameVariations.forEach((nameVariant) => {
-			const nameVariantsEditListItem = document.createElement("poi-edit-entry");
+			const nameVariantsEditListItem =
+				document.createElement("poi-edit-entry");
 			nameVariantsEditListItem.setAttribute("value", nameVariant);
 			nameVariantsEditListItem.addEventListener("delete", () => {
 				nameVariantsEditListItem.remove();
 				this.poi?.nameVariations.splice(
-					this.poi.nameVariations.indexOf(nameVariant), 1
+					this.poi.nameVariations.indexOf(nameVariant),
+					1
 				);
 			});
 			nameVariantsEditList!.appendChild(nameVariantsEditListItem);
@@ -211,18 +220,27 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 	}
 
 	fillDescriptionVariantsEditList() {
-		const descriptionVariantsEditList = this.shadowRoot.querySelector(".poi-edit__description-variants-edit-list");
+		const descriptionVariantsEditList = this.shadowRoot.querySelector(
+			".poi-edit__description-variants-edit-list"
+		);
 		descriptionVariantsEditList!.innerHTML = "";
 		this.poi?.descriptionVariations.forEach((descriptionVariant) => {
-			const descriptionVariantsEditListItem = document.createElement("poi-edit-entry");
-			descriptionVariantsEditListItem.setAttribute("value", descriptionVariant);
+			const descriptionVariantsEditListItem =
+				document.createElement("poi-edit-entry");
+			descriptionVariantsEditListItem.setAttribute(
+				"value",
+				descriptionVariant
+			);
 			descriptionVariantsEditListItem.addEventListener("delete", () => {
 				descriptionVariantsEditListItem.remove();
 				this.poi?.descriptionVariations.splice(
-					this.poi.descriptionVariations.indexOf(descriptionVariant), 1
+					this.poi.descriptionVariations.indexOf(descriptionVariant),
+					1
 				);
 			});
-			descriptionVariantsEditList!.appendChild(descriptionVariantsEditListItem);
+			descriptionVariantsEditList!.appendChild(
+				descriptionVariantsEditListItem
+			);
 		});
 	}
 }

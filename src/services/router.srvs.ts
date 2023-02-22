@@ -37,7 +37,7 @@ export class RouterService {
 		return this.routes;
 	}
 
-	public navigateTo(path: string, value?: any): void {
+	public navigate(path: string, value?: any): void {
 		this.activeRoute = this.routes.find((route) => route.path === path) || this.activeRoute;
 		this.activeRoute.returnFunction(value);
 	}
