@@ -43,8 +43,7 @@ export class SessionService {
 	}
 
 	public static load(): SessionService | null {
-		this.reloadSession();
-
+		SessionService.reloadSession();
 		Helper.sleep(300);
 
 		if (this.instance) {
@@ -54,18 +53,14 @@ export class SessionService {
 		}
 	}
 
-	public static reloadSession(): void {
-		const session = chrome.storage.local.get("session");
-		session.then((data) => {
-			if (data) {
-				const obj = <SessionService>JSON.parse(data.session);
-				const result = new SessionService();
-				result.config = obj.config;
-				SessionService.instance = result;
-			}
-		}).catch((err) => {
-			console.error(err);
-		});
+	public static async reloadSession(): Promise<void> {
+		const session = await chrome.storage.local.get("session");
+		const result = new SessionService();
+		if (session && session.session) {
+			const obj = <SessionService>JSON.parse(session.session);
+			result.config = obj.config;
+			this.instance = result;
+		}
 	}
 
 	public static resetSession(): void {
