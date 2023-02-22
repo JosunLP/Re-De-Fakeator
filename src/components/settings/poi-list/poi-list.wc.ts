@@ -1,4 +1,4 @@
-import { POIHandler } from "./../../../classes/poiHandler";
+import { PoiService } from "../../../services/poi.srvs";
 import { POI } from "../../../types/poi.type";
 import { WebComponent } from "../../../interfaces/wc.interface";
 import { RouterService } from "../../../services/router.srvs";
@@ -73,6 +73,6 @@ export class PoiList extends HTMLElement implements WebComponent {
 	}
 
 	private getPoiList(): POI[] {
-		return POIHandler.getInstance().getPOIs();
+		return PoiService.getInstance().getPOIs();
 	}
 }

@@ -1,13 +1,13 @@
-import { POIHandler } from "./classes/poiHandler";
-import { Session } from "./classes/session";
+import { PoiService } from "./services/poi.srvs";
+import { SessionService } from "./services/session.srvs";
 import { ComponentService } from "./services/component.srvs";
 import { RouterService } from "./services/router.srvs";
 import { MenuItem } from "./types/menuItem.type";
 import { POI } from "./types/poi.type";
 
 class Settings {
-	private session = Session.getInstance();
-	private poiHandler = POIHandler.getInstance();
+	private session = SessionService.getInstance();
+	private poiHandler = PoiService.getInstance();
 	private router = RouterService.getInstance();
 
 	constructor() {

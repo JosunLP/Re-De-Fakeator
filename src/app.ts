@@ -1,12 +1,16 @@
-import { Session } from "./classes/session"
+import { PoiService } from './services/poi.srvs';
+import { SessionService } from "./services/session.srvs"
 import { ComponentService } from "./services/component.srvs"
 
 class App {
 
     private static contentEntry: string = "content"
 
+	sessionService = SessionService.getInstance()
+	componentService = ComponentService.getInstance()
+	poiService = PoiService.getInstance()
+
     constructor() {
-		ComponentService.getInstance()
         this.drawData()
         this.main()
     }
@@ -16,7 +20,6 @@ class App {
     }
 
     async drawData(): Promise<void> {
-        const session = Session.getInstance()
         const contentRoot = <HTMLDivElement>document.getElementById(App.contentEntry)
         const body = document.createElement("div")
         const title = document.createElement("h1")

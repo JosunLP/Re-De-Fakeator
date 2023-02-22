@@ -1,18 +1,18 @@
 import { POI } from "../types/poi.type";
-import { Session } from "./session";
+import { SessionService } from "./session.srvs";
 
-export class POIHandler {
-	private static instance: POIHandler;
+export class PoiService {
+	private static instance: PoiService;
 
 	private constructor() {}
 
-	private session = Session.getInstance();
+	private session = SessionService.getInstance();
 
 	public static getInstance() {
-		if (!POIHandler.instance) {
-			POIHandler.instance = new POIHandler();
+		if (!PoiService.instance) {
+			PoiService.instance = new PoiService();
 		}
-		return POIHandler.instance;
+		return PoiService.instance;
 	}
 
 	public getPOIs(): POI[] {
@@ -34,8 +34,8 @@ export class POIHandler {
 		if (config) {
 			this.session.config.POIs = POIs;
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 
 	public addPOI(POI: POI) {
@@ -43,8 +43,8 @@ export class POIHandler {
 		if (config) {
 			this.session.config.POIs.push(POI);
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 
 	public removePOI(id: string) {
@@ -59,8 +59,8 @@ export class POIHandler {
 			}
 			this.session.config.POIs = POIs;
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 
 	public updatePOI(POI: POI) {
@@ -75,8 +75,8 @@ export class POIHandler {
 			}
 			this.session.config.POIs = POIs;
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 
 	public createPOI(): POI {
@@ -97,8 +97,8 @@ export class POIHandler {
 			);
 			this.setPOIs(POIs);
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 
 	removeNameVariation(value: POI, nameVariant: string) {
@@ -110,7 +110,7 @@ export class POIHandler {
 			);
 			this.setPOIs(POIs);
 		}
-		Session.save();
-		Session.load();
+		SessionService.save();
+		SessionService.load();
 	}
 }
