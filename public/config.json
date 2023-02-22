@@ -1,7 +1,7 @@
 {
     "POIs": [
         {
-            "id": "1",
+            "id": "7e8b304e-85da-4cdb-b70f-b46d392919b2",
             "name": "Donald Trump",
             "nameVariations": [
                 "Donald J. Trump",
@@ -10,13 +10,28 @@
                 "DonaldTrump"
             ],
             "descriptionVariations": [
-                "bekannter Lügner und Rassist",
-                "hat die Welt in Gefahr gebracht",
-                "guter Freund von Putin"
+                "Donald Trump (der gerne Behinderte nachäfft)",
+                "Donald Trump (der sich gerne öffentlich über Behinderte lustig macht)",
+                "Donald Trump (der die freie Presse als Feind des Volkes bezeichnet)",
+                "Pussygrabber Donald Trump",
+                "Lügner Donald Trump",
+                "Frauenfeind Donald Trump",
+                "Ehemaliger \"US-Präsident\" Donald Trump",
+                "Verschwörungstheoretiker Donald Trump, der keinen moralischen Kompass oder irgendwelche Ideale hat",
+                "Donald Trump (der kein gutes Vorbild für irgendjemanden ist)",
+                "Donald Trump (wird von einem versoffenen Nazi manipuliert)",
+                "Donald Trump (die Handpuppe von Steve Bannon)",
+                "Donald Trump (der keine dicken Frauen mag)",
+                "Donald Trump (weiß nicht so richtig, wie das mit der Gewaltenteilung funktioniert)",
+                "Donald Trump (Telefoniert regelmäßig mit einem irren Verschwörungstheoretiker)",
+                "Donald Trump (der gerne seine Tochter daten würde)",
+                "Donald Trump (der glaubt, dass Impfungen Autismus verursachen)",
+                "Donald Trump (der laut eigener Aussage keine kleinen Hände hat)",
+                "Donald Trump (der 6 Stunden am Tag fernsieht)"
             ]
         },
         {
-            "id": "2",
+            "id": "915fdb10-1256-4473-8bfc-295a7831eace",
             "name": "J. K. Rowling",
             "nameVariations": [
                 "Joanne K. Rowling",
@@ -30,6 +45,213 @@
             "descriptionVariations": [
                 "hat sich mehrfach offen Transphob geäußert",
                 "ist eine TERF"
+            ]
+        },
+        {
+            "id": "a0b3f9a1-0b1f-4b0f-9b1f-5c5f5c5f5c5f",
+            "name": "AFD",
+            "nameVariations": [
+                "Alternative für Deutschland"
+            ],
+            "descriptionVariations": [
+                "AfD (eine rechtsextreme, in Teilen antisemitische und fremdenfeindliche Partei)",
+                "AfD (deren Mitglieder gern zur Weinerlichkeit neigen, wenn man sie kritisiert)",
+                "Alternative für Deutschland (eine rechtsextreme, in Teilen antisemitische und fremdenfeindliche Partei)",
+                "Alternative für Deutschland (deren Mitglieder gern zur Weinerlichkeit neigen, wenn man sie kritisiert)"
+            ]
+        },
+        {
+            "id": "2f3c86d5-a4c3-4b12-9fbc-fba1ff8db443",
+            "name": "NPD",
+            "nameVariations": [
+                "Nationaldemokratische Partei Deutschlands"
+            ],
+            "descriptionVariations": [
+                "NPD (eine rechtsextreme, aber gesellschaftlich irrelevante Partei)",
+                "NPD (die Partei, die zu irrelevant ist, um verboten zu werden)",
+                "Nationaldemokratische Partei Deutschlands (eine rechtsextreme, aber gesellschaftlich irrelevante Partei)",
+                "Nationaldemokratische Partei Deutschlands (die Partei, die zu irrelevant ist, um verboten zu werden)"
+            ]
+        },
+        {
+            "id": "c0d3e4f5-6a7b-8c9d-0e1f-2a3b4c5d6e7f",
+            "name": "Björn Höcke",
+            "nameVariations": [
+                "Björn (Bernd) Höcke"
+            ],
+            "descriptionVariations": [
+                "Björn Höcke (der überraschend gut mit der Szene gewaltbereiter Neonazis vernetzt ist)",
+                "Björn Höcke (der mit rechtsradikalem Vokabular jonglierender Ex-Sportlehrer)",
+                "Björn Höcke (der sagt, dass nicht alles unter Hitler schlecht war)",
+                "Björn Höcke (der mutmaßlich unter dem Pseudonym \"Landolf Ladig\" rechtsextreme Texte verbreitet)",
+                "Björn Höcke (der findet, das Holocaust-Mahnmal sei ein Denkmal der Schande)",
+                "Björn Höcke (der sich eine 1000-jährige Zukunft für Deutschland wünscht)",
+                "Nationalist Björn Höcke",
+                "Rassist Björn Höcke",
+                "Demagoge Björn Höcke",
+                "Bernd Höcke"
+            ]
+        },
+        {
+            "id": "8a7b6c5d-4e3f-2d1e-0f9a-8b7c6d5e4f3e",
+            "name": "Jan Böhmermann",
+            "nameVariations": [],
+            "descriptionVariations": [
+                "Hobby-Lyriker Jan Böhmermann",
+                "Pseudo-Rapper Jan Böhmermann",
+                "Witzweltmeister Jan Böhmermann",
+                "Grimme-Preis- und Linksträger Jan Böhmermann",
+                "Jan \"Mr. Cool\" Böhmermann",
+                "Jan \"The King\" Böhmermann"
+            ]
+        },
+        {
+            "id": "9a8b7c6d-5e4f-3e2d-1f0e-9a8b7c6d5e4f",
+            "name": "Recep Tayyip Erdoğan",
+            "nameVariations": [
+                "Erdogan",
+                "Recep Tayyip Erdogan"
+            ],
+            "descriptionVariations": [
+                "Erdoğan (der freie Journalisten inhaftiert, als Zeichen seiner demokratischen Gesinnung)",
+                "Erdoğan (der Opposition am besten findet, wenn sie im Knast sitzt)",
+                "Erdoğan (der Menschen wegen Witzen einsperren lässt)",
+                "Erdoğan (der das Parlament entmachten und absetzen will, wann er möchte)",
+                "Erdoğan (der Krieg gegen seine eigene Bevölkerung führt)",
+                "Erdoğan (der sich mit Steuergeldern einen Prunkpalast hat bauen lassen)",
+                "Sensibelchen Erdoğan",
+                "Prozesshansel Erdoğan"
+            ]
+        },
+        {
+            "id": "a9b8c7d6-5e4f-3e2d-1f0e-9a8b7c6d5e4f",
+            "name": "Frauke Petry",
+            "nameVariations": [
+                "Frauke Petry (die)"
+            ],
+            "descriptionVariations": [
+                "Flüchtlingstochter Frauke Petry",
+                "Frauke Petry (die sich manchmal mit russischen Rechtsextremisten trifft)",
+                "Frauke Petry (Findet den Begriff \"völkisch\" ganz okay)",
+                "Frauke Petry (Nennt die Medien \"Pinocchio-Presse\")",
+                "Frauke Petry (Hat mehrere Kinder von unterschiedlichen Männern und setzt sich für die traditionelle Familienwerte ein)",
+                "Frauke Petry (die glaubt, dass der Klimawandel nicht menschengemacht ist)"
+            ]
+        },
+        {
+            "id": "b8c7d6e5-4f3e-2d1e-0f9a-8b7c6d5e4f3e",
+            "name": "Horst Seehofer",
+            "nameVariations": [
+                "Horst Seehofer (der)",
+                "Horschtel Seehofer"
+            ],
+            "descriptionVariations": [
+                "Horst Seehofer (der von Donald Trump beeindruckt ist)",
+                "Horst Seehofer (Will sich bis zur \"letzten Patrone\" gegen Einwanderung in deutsche Sozialsysteme wehren)"
+            ]
+        },
+        {
+            "id": "cd80ca20-d690-49a7-9770-52041061e820",
+            "name": "Beatrix von Storch",
+            "nameVariations": [
+                "Beatrix von Storch (die)"
+            ],
+            "descriptionVariations": [
+                "Beatrix von Storch (will auf Flüchtlinge schießen lassen, aber nur als \"Ultima Ratio\")",
+                "Beatrix von Storch (deren Maus gern mal menschenverachtende Postings absetzt)",
+                "Mausausrutscherin Beatrix von Storch",
+                "Beatrix von Storch (Enkelin des von Hitlers Finanzminister)",
+                "Beatrix von Storch (Enkelin eines verurteilten NSDAP-Kriegsverbrechers)"
+            ]
+        },
+        {
+            "id": "1e8c3467-112d-4515-8fc4-260538f1339d",
+            "name": "Alexander Gauland",
+            "nameVariations": [
+                "Alexander Gauland (der)"
+            ],
+            "descriptionVariations": [
+                "Alexander Gauland (findet Putin gut)",
+                "Hundekrawattenträger Alexander Gauland",
+                "Altherrennationalist Alexander Gauland",
+                "Alexander Gauland (der sich von Kinderaugen nicht erpressen lassen will)",
+                "Alexander Gauland (der für Deutschland auch ein Einreiseverbot für Moslems und\/oder Flüchtlinge wie in den USA möchte)",
+                "Alexander Gauland (der Deutschland als Provokation eine \"Diktatur\" nennt)",
+                "Alexander Gauland (der Migration aus \"bestimmten Kulturkreisen\" für problematisch hält)",
+                "Alexander Gauland (der Deutschen unterstellt, nicht neben Jérôme Boateng wohnen zu wollen)"
+            ]
+        },
+        {
+            "id": "85e2debb-9f70-4828-be78-740122bbb785",
+            "name": "Viktor Orbán",
+            "nameVariations": [
+                "Viktor Orbán (der)",
+                "Viktor Orban"
+            ],
+            "descriptionVariations": [
+                "Viktor Orbán (der die Presse im eigenen Land unterdrückt)",
+                "Viktor Orbán (der EU-Gelder an Parteifreunde und Familienmitglieder verteilt)",
+                "Viktor Orbán (der Geflüchtete in fensterlosen Schiffscontainern hausen lässt)",
+                "Viktor Orbán (der einen Stacheldrahtzaun gegen Flüchtlinge gebaut hat)"
+            ]
+        },
+        {
+            "id": "27a04bd6-2868-4a84-b3e0-deb4d60951a8",
+            "name": "Marine Le Pen",
+            "nameVariations": [
+                "Marine Le Pen (die)"
+            ],
+            "descriptionVariations": [
+                "Marine Le Pen (lässt sich von Putin aushalten)",
+                "Nationalistin Marine Le Pen",
+                "Marine Le Pen (Gegnerin der freie Presse)",
+                "Marine Le Pen (gegen die mehrere Ermittlungsverfahren liefen)",
+                "Marine Le Pen (deren Immunität vom europäischen Parlament wegen möglicher strafbarer \"Verbreitung von Gewaltbildern\" aufgehoben wurde)",
+                "Marine Le Pen (die das Establishment hasst, obwohl sie dazu gehört)",
+                "Marine Le Pen (die die EU abschaffen will)"
+            ]
+        },
+        {
+            "id": "94817699-448c-4470-b8c9-05600849bc63",
+            "name": "Geert Wilders",
+            "nameVariations": [
+                "Geert Wilders (der)"
+            ],
+            "descriptionVariations": [
+                "Geert Wilders (der das einzige Mitglied seiner Partei ist und diese wie eine Diktatur führt)",
+                "Lügner Geert Wilders",
+                "Sonnenbankjunkie Geert Wilders",
+                "Geert Wilders (der alle Moscheen und den Koran in Holland verbieten will)",
+                "Geert Wilders (der die EU abschaffen will)",
+                "Geert Wilders (dessen rechtsradikalen Quatsch sogar sein eigener Bruder nicht mehr aushält)",
+                "Geert Wilders (der seit 12 Jahren isoliert und von Bodyguards umgeben lebt und trotzdem genau weiß, was \"das Volk\" will)"
+            ]
+        },
+        {
+            "id": "3182de91-4bc7-4710-be28-36dde7679bd0",
+            "name": "Markus Söder",
+            "nameVariations": [
+                "Markus Söder (der)"
+            ],
+            "descriptionVariations": [
+                "Markus Söder (der immer so tut als wisse er ganz genau, was die \"deutschen Bürger\" wollen)",
+                "Social-Media-Messie Markus Söder",
+                "Markus Söder (der Homer Simpson der CSU)",
+                "Markus Söder (der sich in die BR-Vorabendserie \"Dahoam is Dahoam\" reinschreiben ließ)"
+            ]
+        },
+        {
+            "id": "4e63b358-0a97-4f0c-b304-335c800f1bdd",
+            "name": "Sahra Wagenknecht",
+            "nameVariations": [
+                "c (die)"
+            ],
+            "descriptionVariations": [
+                "Sahra Wagenknecht (die ein \"Manifest für Frieden\" verfasst hat, das den Angrifskrieg von Putin gegen die Ukraine rechtfertigt)",
+                "Sahra Wagenknecht (die russiche Propaganda verbreitet)",
+                "Sahra Wagenknecht (die Kriegsverbrechen von Putin in der Ukraine leugnet)",
+                "Sahra Wagenknecht (die die Krimannexion von Putin gut findet)",
+                "Sahra Wagenknecht (die Realitätsverweigerin)"
             ]
         }
     ]
