@@ -19,7 +19,10 @@
     "open_in_tab": true
   },
   "permissions": [
-    "notifications"
+    "notifications",
+    "storage",
+    "unlimitedStorage",
+    "activeTab"
   ],
   "background": {
     "service_worker": "js/background.js"

@@ -35,6 +35,13 @@
 @mixin shadow
   box-shadow: 0px 0px 30px silver
 
+@mixin customUnderline($height: 0.25rem)
+  content: ''
+  display: block
+  width: 100%
+  height: $height
+  background-color: $seccond-color
+
 @mixin noselect
   -webkit-touch-callout: none
   -webkit-user-select: none

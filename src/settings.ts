@@ -61,9 +61,20 @@ class Settings {
 				this.clearSettings();
 				const poiEdit = document.createElement("poi-edit");
 				poiEdit.setAttribute("value", JSON.stringify(value));
-				poiEdit.id = "poiForm";
+				poiEdit.id = "poiEdit";
 				<HTMLDivElement>(
 					document.getElementById("settings")!.appendChild(poiEdit)
+				);
+			},
+		});
+		this.router.addRoute({
+			path: "/add-poi",
+			returnFunction: () => {
+				this.clearSettings();
+				const poiNew = document.createElement("poi-new");
+				poiNew.id = "poiNew";
+				<HTMLDivElement>(
+					document.getElementById("settings")!.appendChild(poiNew)
 				);
 			},
 		});

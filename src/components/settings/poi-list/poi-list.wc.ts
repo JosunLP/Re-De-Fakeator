@@ -7,6 +7,7 @@ import { Helper } from "../../../classes/helper";
 export class PoiList extends HTMLElement implements WebComponent {
 	router = RouterService.getInstance();
 	template = document.createElement("div");
+	link = document.createElement("link");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -22,7 +23,8 @@ export class PoiList extends HTMLElement implements WebComponent {
 	run() {
 		this.reset();
 		this.render();
-		Helper.sleep(10).then(() => {
+		this.renderStyle();
+		Helper.sleep(100).then(() => {
 			this.fillList();
 		});
 	}
@@ -30,6 +32,12 @@ export class PoiList extends HTMLElement implements WebComponent {
 	reset(): void {
 		this.template.innerHTML = "";
 		this.template.className = "";
+	}
+
+	renderStyle(): void {
+		this.link.setAttribute("rel", "stylesheet");
+		this.link.setAttribute("href", "./css/app.css");
+		this.shadowRoot.appendChild(this.link);
 	}
 
 	render(): void {

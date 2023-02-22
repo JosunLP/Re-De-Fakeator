@@ -2,6 +2,7 @@ import { WebComponent } from "../../../interfaces/wc.interface";
 
 export class PoiNew extends HTMLElement implements WebComponent {
 	template = document.createElement("div");
+	link = document.createElement("link");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -11,15 +12,16 @@ export class PoiNew extends HTMLElement implements WebComponent {
 	}
 
 	connectedCallback(): void {
-		this.run();
+		this.render();
+		this.renderStyle();
 	}
 
-	run(): void {
-		throw new Error("Method not implemented.");
+	renderStyle(): void {
+		this.link.setAttribute("rel", "stylesheet");
+		this.link.setAttribute("href", "./css/app.css");
+		this.shadowRoot.appendChild(this.link);
 	}
-	reset(): void {
-		throw new Error("Method not implemented.");
-	}
+
 
 	render(): void {
 		this.template.className = "poi-new";

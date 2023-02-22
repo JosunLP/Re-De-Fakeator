@@ -6,6 +6,7 @@ import { WebComponent } from "../../interfaces/wc.interface";
 export class MenuComponent extends HTMLElement implements WebComponent {
 	template = document.createElement("div");
 	private router = RouterService.getInstance();
+	link = document.createElement("link");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -21,6 +22,7 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 	run() {
 		this.reset();
 		this.render();
+		this.renderStyle();
 		this.renderListItems();
 	}
 
@@ -28,6 +30,13 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 		this.template.innerHTML = "";
 		this.template.className = "";
 	}
+
+	renderStyle(): void {
+		this.link.setAttribute("rel", "stylesheet");
+		this.link.setAttribute("href", "./css/app.css");
+		this.shadowRoot.appendChild(this.link);
+	}
+
 
 	render() {
 		this.template.classList.add("menu");
@@ -41,6 +50,8 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 
 		const list = document.createElement("ul");
 		list.classList.add("menu__list");
+		list.classList.add("btn-group");
+		list.classList.add("btn-group-toggle");
 		this.template.appendChild(list);
 	}
 
@@ -57,6 +68,7 @@ export class MenuComponent extends HTMLElement implements WebComponent {
 				listItem.classList.add("menu__item");
 				listItem.classList.add("menu__item--link");
 				listItem.classList.add("btn");
+				listItem.classList.add("btn-secondary");
 				listItem.innerText = menuItem.name;
 				list.appendChild(listItem);
 			});

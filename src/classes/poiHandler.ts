@@ -34,6 +34,7 @@ export class POIHandler {
 		if (config) {
 			this.session.config.POIs = POIs;
 		}
+		Session.save();
 	}
 
 	public addPOI(POI: POI) {
@@ -41,6 +42,7 @@ export class POIHandler {
 		if (config) {
 			this.session.config.POIs.push(POI);
 		}
+		Session.save();
 	}
 
 	public removePOI(id: string) {
@@ -55,6 +57,7 @@ export class POIHandler {
 			}
 			this.session.config.POIs = POIs;
 		}
+		Session.save();
 	}
 
 	public updatePOI(POI: POI) {
@@ -69,6 +72,7 @@ export class POIHandler {
 			}
 			this.session.config.POIs = POIs;
 		}
+		Session.save();
 	}
 
 	removeDescriptionVariation(value: POI, descriptionVariant: string) {
@@ -80,6 +84,7 @@ export class POIHandler {
 			);
 			this.setPOIs(POIs);
 		}
+		Session.save();
 	}
 
 	removeNameVariation(value: POI, nameVariant: string) {
@@ -91,5 +96,6 @@ export class POIHandler {
 			);
 			this.setPOIs(POIs);
 		}
+		Session.save();
 	}
 }

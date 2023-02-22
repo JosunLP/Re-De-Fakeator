@@ -2,6 +2,7 @@ import { WebComponent } from "../../../interfaces/wc.interface";
 
 export class PoiNewEntry extends HTMLDataListElement implements WebComponent {
 	template = document.createElement("li");
+	link = document.createElement("link");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });
 
@@ -14,14 +15,15 @@ export class PoiNewEntry extends HTMLDataListElement implements WebComponent {
 		this.render(
 			this.getAttribute("value") ? this.getAttribute("value")! : "Name"
 		);
+		this.renderStyle();
 	}
 
-	run(): void {
-		throw new Error("Method not implemented.");
+	renderStyle(): void {
+		this.link.setAttribute("rel", "stylesheet");
+		this.link.setAttribute("href", "./css/app.css");
+		this.shadowRoot.appendChild(this.link);
 	}
-	reset(): void {
-		throw new Error("Method not implemented.");
-	}
+
 
 	render(value: string): void {
 		this.template.className = "poi-new__entry";

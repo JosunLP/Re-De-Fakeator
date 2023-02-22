@@ -8,6 +8,7 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 	poiHandler = POIHandler.getInstance();
 	router = RouterService.getInstance();
 	template = document.createElement("div");
+	link = document.createElement("link");
 
 	private poi: POI | null = null;
 
@@ -20,6 +21,7 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 
 	connectedCallback(): void {
 		this.render(JSON.parse(this.getAttribute("value")!) as POI);
+		this.renderStyle();
 		this.shadowRoot.querySelector(".poi-edit__name-edit-input")!.addEventListener("input", (e) => {
 			this.poi!.name = (e.target as HTMLInputElement).value;
 		});
@@ -28,6 +30,13 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 			this.fillDescriptionVariantsEditList();
 		});
 	}
+
+	renderStyle(): void {
+		this.link.setAttribute("rel", "stylesheet");
+		this.link.setAttribute("href", "./css/app.css");
+		this.shadowRoot.appendChild(this.link);
+	}
+
 
 	render(value: POI): void {
 		this.poi = value;
@@ -52,6 +61,8 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		nameEditLabel.className = "poi-edit__name-edit-label";
 		nameEditLabel.innerText = "Name";
 		nameEditInput.className = "poi-edit__name-edit-input";
+		nameEditInput.type = "text";
+		nameEditInput.classList.add("form-control");
 		nameEditInput.value = value.name;
 
 		nameEdit.appendChild(nameEditLabel);
@@ -80,7 +91,11 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		nameVariantsNewLabel.className = "poi-edit__name-variants-new-label";
 		nameVariantsNewLabel.innerText = "Add Name Variant";
 		nameVariantsNewInput.className = "poi-edit__name-variants-new-input";
+		nameVariantsNewInput.type = "text";
+		nameVariantsNewInput.classList.add("form-control");
 		nameVariantsNewButton.className = "poi-edit__name-variants-new-button";
+		nameVariantsNewButton.classList.add("btn");
+		nameVariantsNewButton.classList.add("btn-outline-success");
 		nameVariantsNewButton.innerText = "Add";
 
 		nameVariantsNewButton.addEventListener("click", () => {
@@ -119,8 +134,12 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 		descriptionVariantsNewLabel.className = "poi-edit__description-variants-new-label";
 		descriptionVariantsNewLabel.innerText = "Add Description Variant";
 		descriptionVariantsNewInput.className = "poi-edit__description-variants-new-input";
+		descriptionVariantsNewInput.type = "text";
+		descriptionVariantsNewInput.classList.add("form-control");
 		descriptionVariantsNewButton.className = "poi-edit__description-variants-new-button";
 		descriptionVariantsNewButton.innerText = "Add";
+		descriptionVariantsNewButton.classList.add("btn");
+		descriptionVariantsNewButton.classList.add("btn-outline-success");
 
 		descriptionVariantsNewButton.addEventListener("click", () => {
 			const description = descriptionVariantsNewInput.value;
@@ -142,6 +161,8 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 
 		const deletePoibutton = document.createElement("button");
 		deletePoibutton.className = "poi-edit__delete-button";
+		deletePoibutton.classList.add("btn");
+		deletePoibutton.classList.add("btn-outline-danger");
 		deletePoibutton.innerText = "Delete";
 
 		deletePoibutton.addEventListener("click", () => {
@@ -151,6 +172,8 @@ export class PoiEdit extends HTMLElement implements WebComponent {
 
 		const savePoibutton = document.createElement("button");
 		savePoibutton.className = "poi-edit__save-button";
+		savePoibutton.classList.add("btn");
+		savePoibutton.classList.add("btn-outline-success");
 		savePoibutton.innerText = "Save";
 
 		savePoibutton.addEventListener("click", () => {

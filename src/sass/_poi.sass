@@ -1,0 +1,134 @@
+@import "root"
+@import "mixin"
+
+@mixin smalUnderline()
+  margin-top: 0.7rem
+  margin-bottom: 0.7rem
+  @include customUnderline(0.1rem)
+
+
+.poi-list
+  display: flex
+  flex-direction: column
+  margin: auto
+  width: 100%
+  height: 100%
+  overflow: auto
+  color: $main-font-color
+
+  &__list
+    display: flex
+    flex-direction: column
+
+    @include respond-to(wide-screens)
+      flex-direction: row
+      flex-wrap: wrap
+      justify-content: left
+      align-items: flex-start
+
+  &__item
+    @include respond-to(handhelds)
+      font-size: 1rem
+      border-radius: 0.5rem
+      padding: 0.5rem
+      margin-bottom: 0.5rem
+
+    @include respond-to(medium-screens)
+      font-size: 1.5rem
+      border-radius: 0.7rem
+      padding: 1rem
+      margin-bottom: 1rem
+
+    @include respond-to(wide-screens)
+      font-size: 1rem
+      border-radius: 0.7rem
+      max-width: fit-content
+      min-width: 3rem
+      padding: 1rem
+      margin: 0.5rem
+  li
+    list-style-type: none
+    background-color: $background-color-content
+    pointer-events: auto
+    cursor: pointer
+
+    &:hover
+      background-color: $background-color-content-hover
+
+    &:focus
+      background-color: $background-color-content-focus
+
+    &:active
+      background-color: $background-color-content-active
+
+.poi-edit
+
+  input
+    width: 100%
+    height: 2.5rem
+    font-size: 1.5rem
+    padding: 0.5rem
+    border: 1px solid $seccond-color
+    border-radius: 0.25rem
+    background-color: $background-color-content
+    color: $main-font-color
+
+  button
+    font-size: 1.5rem
+    margin: 0.5rem
+
+  &__header
+   h2
+      font-size: 2rem
+      font-weight: bold
+      color: $main-font-color
+
+      &::after
+        @include customUnderline
+
+  &__form
+    label
+      display: block
+      margin-bottom: 0.5rem
+      font-size: 1.5rem
+      font-weight: bold
+      color: $main-font-color
+
+  &__name-edit
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+    align-items: left
+    margin-bottom: 0.7rem
+
+    &::after
+      @include smalUnderline()
+
+    label
+      margin-right: 0.5rem
+
+  &__name-variants-new
+    &::after
+      @include smalUnderline()
+  &__name-variants-edit-list
+    &::after
+      @include smalUnderline()
+  &__description-variants-edit
+    &::after
+      @include smalUnderline()
+  &__description-variants-new
+    &::after
+      @include smalUnderline()
+
+.poi-edit-entry
+  display: flex
+  flex-direction: row
+  justify-content: space-between
+  margin-bottom: 0.7rem
+  span
+    margin-bottom: 0.5rem
+    font-size: 1.3rem
+    font-weight: lighter
+    color: $main-font-color
+
+

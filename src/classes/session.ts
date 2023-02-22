@@ -1,14 +1,23 @@
+import { Helper } from './helper';
 import { RunntimeConfig } from "../types/runntimeConfig.type";
 import { FileHandler } from "./fileHandler";
 
 export class Session {
 	private static instance: Session;
 
-	public config: RunntimeConfig = { POIs: [] };
+	public config: RunntimeConfig;
 
 	private constructor() {
+		this.config = { POIs: [{
+			id: "1",
+			name: "Test",
+			nameVariations: [],
+			descriptionVariations: [],
+		}] };
+
 		FileHandler.readFileAsync("config.json").then((data) => {
 			this.config = JSON.parse(data);
+			Session.save();
 		});
 	}
 
@@ -24,28 +33,35 @@ export class Session {
 	}
 
 	public static save() {
-		localStorage.setItem("session", JSON.stringify(this.instance));
+		chrome.storage.local.set({ session: JSON.stringify(this.instance) });
 	}
 
 	public static load(): Session | null {
-		const session = localStorage.getItem("session");
-		if (session) {
-			const obj = <Session>JSON.parse(session);
-			const result = new Session();
-			result.config = obj.config;
-			return result;
-		}
-		return null;
+		const session = chrome.storage.local.get("session");
+		let result = new Session();
+		session.then((data) => {
+			if (data) {
+				const obj = <Session>JSON.parse(data.session);
+				result.config = obj.config;
+				Session.instance = result;
+			}
+		}).catch((err) => {
+			console.error(err);
+		});
+		Helper.sleep(100);
+		return Session.instance;
 	}
 
 	public static reloadSession() {
-		const session = localStorage.getItem("session");
-		if (session) {
-			const obj = <Session>JSON.parse(session);
-			const result = new Session();
-			result.config = obj.config;
-			Session.instance = result;
-		}
+		const session = chrome.storage.local.get("session");
+		session.then((data) => {
+			if (data) {
+				const obj = <Session>JSON.parse(data.session);
+				const result = new Session();
+				result.config = obj.config;
+				Session.instance = result;
+			}
+		});
 	}
 
 	public static resetSession() {

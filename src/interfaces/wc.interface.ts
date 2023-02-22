@@ -1,6 +1,7 @@
 export interface WebComponent extends HTMLElement {
 	template: HTMLElement;
 	shadowRoot: ShadowRoot;
+	link: HTMLLinkElement;
 
 	connectedCallback(): void;
 
@@ -9,4 +10,6 @@ export interface WebComponent extends HTMLElement {
 	reset?(): void;
 
 	render(value?: string | undefined | any): void;
+
+	renderStyle(): void;
 }
