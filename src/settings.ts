@@ -1,4 +1,4 @@
-import { PoiService } from "./services/poi.srvs";
+import { PoiService } from './services/poi.srvs';
 import { SessionService } from "./services/session.srvs";
 import { ComponentService } from "./services/component.srvs";
 import { RouterService } from "./services/router.srvs";
@@ -6,12 +6,12 @@ import { MenuItem } from "./types/menuItem.type";
 import { POI } from "./types/poi.type";
 
 class Settings {
-	private session = SessionService.getInstance();
-	private poiHandler = PoiService.getInstance();
 	private router = RouterService.getInstance();
 
 	constructor() {
+		SessionService.getInstance();
 		ComponentService.getInstance();
+		PoiService.getInstance();
 
 		this.renderMenu();
 		this.routes();
@@ -37,6 +37,18 @@ class Settings {
 			},
 		];
 		menu.id = "menu";
+
+		// TEMP - REMOVE
+		const button = document.createElement("button");
+		button.innerText = "Reset";
+		button.classList.add("btn");
+		button.classList.add("btn-danger");
+		button.addEventListener("click", () => {
+			SessionService.resetSession();
+			window.location.reload();
+		});
+		app.insertBefore(button, document.getElementById("settings")!);
+		// TEMP - REMOVE
 
 		menu.setAttribute("menuItems", JSON.stringify(menuItems));
 

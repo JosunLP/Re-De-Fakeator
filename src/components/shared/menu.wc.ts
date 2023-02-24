@@ -1,11 +1,11 @@
 import { Helper } from "../../classes/helper";
 import { RouterService } from "../../services/router.srvs";
 import { MenuItem } from "../../types/menuItem.type";
-import { WebComponent } from "../../interfaces/wc.interface";
+import { IWebComponent } from "../../interfaces/wc.interface";
 
-export class MenuComponent extends HTMLElement implements WebComponent {
+export class MenuComponent extends HTMLElement implements IWebComponent {
 	template = document.createElement("div");
-	private router = RouterService.getInstance();
+	router = RouterService.getInstance();
 	link = document.createElement("link");
 
 	public shadowRoot: ShadowRoot = this.attachShadow({ mode: "open" });

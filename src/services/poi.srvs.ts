@@ -35,7 +35,7 @@ export class PoiService {
 			this.session.config.POIs = POIs;
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 
 	public addPOI(POI: POI) {
@@ -44,7 +44,7 @@ export class PoiService {
 			this.session.config.POIs.push(POI);
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 
 	public removePOI(id: string) {
@@ -60,7 +60,7 @@ export class PoiService {
 			this.session.config.POIs = POIs;
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 
 	public updatePOI(POI: POI) {
@@ -76,7 +76,7 @@ export class PoiService {
 			this.session.config.POIs = POIs;
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 
 	public createPOI(): POI {
@@ -98,7 +98,7 @@ export class PoiService {
 			this.setPOIs(POIs);
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 
 	removeNameVariation(value: POI, nameVariant: string) {
@@ -111,6 +111,6 @@ export class PoiService {
 			this.setPOIs(POIs);
 		}
 		SessionService.save();
-		SessionService.load();
+		SessionService.reloadSession();
 	}
 }

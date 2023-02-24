@@ -1,7 +1,7 @@
 import { POI } from "./../../../types/poi.type";
-import { WebComponent } from "../../../interfaces/wc.interface";
+import { IWebComponent } from "../../../interfaces/wc.interface";
 
-export class PoiEditEntry extends HTMLElement implements WebComponent {
+export class PoiEditEntry extends HTMLElement implements IWebComponent {
 	template = document.createElement("li");
 	link = document.createElement("link");
 

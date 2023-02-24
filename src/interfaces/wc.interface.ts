@@ -1,4 +1,4 @@
-export interface WebComponent extends HTMLElement {
+export interface IWebComponent extends HTMLElement {
 	template: HTMLElement;
 	shadowRoot: ShadowRoot;
 	link: HTMLLinkElement;

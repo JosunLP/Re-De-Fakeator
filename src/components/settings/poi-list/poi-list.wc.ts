@@ -1,10 +1,10 @@
 import { PoiService } from "../../../services/poi.srvs";
 import { POI } from "../../../types/poi.type";
-import { WebComponent } from "../../../interfaces/wc.interface";
+import { IWebComponent } from "../../../interfaces/wc.interface";
 import { RouterService } from "../../../services/router.srvs";
 import { Helper } from "../../../classes/helper";
 
-export class PoiList extends HTMLElement implements WebComponent {
+export class PoiList extends HTMLElement implements IWebComponent {
 	router = RouterService.getInstance();
 	template = document.createElement("div");
 	link = document.createElement("link");

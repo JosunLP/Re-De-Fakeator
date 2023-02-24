@@ -1,6 +1,7 @@
 import { Helper } from "../classes/helper";
 import { RunntimeConfig } from "../types/runntimeConfig.type";
 import { FileHandler } from "../classes/fileHandler";
+import { DatabaseService } from "./database.srvs";
 
 export class SessionService {
 	private static instance: SessionService;
@@ -21,10 +22,12 @@ export class SessionService {
 			],
 		};
 
-		FileHandler.readFileAsync("config.json").then((data) => {
-			this.config = JSON.parse(data);
-			SessionService.save();
-		});
+		FileHandler.readFileAsync(Helper.configPath).then(
+			(data) => {
+				this.config = JSON.parse(data);
+				SessionService.save();
+			}
+		);
 	}
 
 	static getInstance(): SessionService {
@@ -39,33 +42,33 @@ export class SessionService {
 	}
 
 	public static save(): void {
-		chrome.storage.local.set({ session: JSON.stringify(this.instance) });
+		DatabaseService.getInstance().set(
+			Helper.configPath,
+			JSON.stringify(SessionService.instance)
+		);
 	}
 
 	public static load(): SessionService | null {
 		SessionService.reloadSession();
 		Helper.sleep(300);
 
-		if (this.instance) {
-			return this.instance;
+		if (SessionService.instance) {
+			return SessionService.instance;
 		} else {
 			return null;
 		}
 	}
 
-	public static async reloadSession(): Promise<void> {
-		const session = await chrome.storage.local.get("session");
-		const result = new SessionService();
-		if (session && session.session) {
-			const obj = <SessionService>JSON.parse(session.session);
-			result.config = obj.config;
-			this.instance = result;
+	public static reloadSession(): void {
+		const session = DatabaseService.getInstance().get(Helper.configPath);
+		if (session) {
+			SessionService.instance = JSON.parse(session);
 		}
 	}
 
 	public static resetSession(): void {
-		chrome.storage.local.remove("session");
-		this.instance = new SessionService();
+		DatabaseService.getInstance().delete(Helper.configPath);
+		SessionService.instance = new SessionService();
 		SessionService.save();
 		location.reload();
 	}
