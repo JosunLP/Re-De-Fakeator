@@ -5,10 +5,11 @@ import { DatabaseService } from "./database.srvs";
 
 export class SessionService {
 	private static instance: SessionService;
+	private static db = DatabaseService.getInstance();
 
-	public config: RunntimeConfig;
+	private config: RunntimeConfig;
 
-	public readonly sessionId: string = crypto.randomUUID();
+	public sessionId: string = crypto.randomUUID();
 
 	private constructor() {
 		this.config = {
@@ -22,12 +23,17 @@ export class SessionService {
 			],
 		};
 
-		FileHandler.readFileAsync(Helper.configPath).then(
-			(data) => {
+		FileHandler.readFileAsync(Helper.configPath)
+			.then((data) => {
 				this.config = JSON.parse(data);
+			})
+			.catch((err) => {
+				console.error(err);
+			})
+			.then(() => {
+				SessionService.instance = this;
 				SessionService.save();
-			}
-		);
+			});
 	}
 
 	static getInstance(): SessionService {
@@ -37,15 +43,13 @@ export class SessionService {
 		if (!SessionService.instance && SessionService.load()) {
 			SessionService.instance = <SessionService>SessionService.load();
 		}
-		SessionService.save();
+
+		Helper.sleepSync(300);
 		return SessionService.instance;
 	}
 
-	public static save(): void {
-		DatabaseService.getInstance().set(
-			Helper.configPath,
-			JSON.stringify(SessionService.instance)
-		);
+	public static async save(): Promise<void> {
+		return await this.db.set(Helper.configPath, JSON.stringify(SessionService.instance));
 	}
 
 	public static load(): SessionService | null {
@@ -59,17 +63,38 @@ export class SessionService {
 		}
 	}
 
-	public static reloadSession(): void {
-		const session = DatabaseService.getInstance().get(Helper.configPath);
+	public static async reloadSession(): Promise<void> {
+		const session = await this.db.get(Helper.configPath);
 		if (session) {
-			SessionService.instance = JSON.parse(session);
+			const result = new SessionService();
+			result.config = (<SessionService>JSON.parse(session)).config;
+			result.sessionId = (<SessionService>JSON.parse(session)).sessionId;
+			SessionService.instance = result;
 		}
 	}
 
-	public static resetSession(): void {
-		DatabaseService.getInstance().delete(Helper.configPath);
+	public static async resetSession(): Promise<void> {
+		await this.db.delete(Helper.configPath);
 		SessionService.instance = new SessionService();
 		SessionService.save();
 		location.reload();
+	}
+
+	public static setConfig(config: RunntimeConfig): void {
+		SessionService.instance.config = config;
+		SessionService.save();
+	}
+
+	public static getConfig(): RunntimeConfig {
+		return SessionService.instance.config;
+	}
+
+	public static getPois(): RunntimeConfig["POIs"] {
+		return SessionService.instance.config.POIs;
+	}
+
+	public static setPois(pois: RunntimeConfig["POIs"]): void {
+		SessionService.instance.config.POIs = pois;
+		SessionService.save();
 	}
 }

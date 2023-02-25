@@ -12,22 +12,23 @@ export class DatabaseService {
 		return DatabaseService.instance;
 	}
 
-	public set(key: string, value: string): void {
-		chrome.storage.local.set({ [key]: value });
-		console.log(`DatabaseService.set: ${key} =`);
-		console.log(JSON.parse(value));
+	public async set(key: string, value: string): Promise<void> {
+		return chrome.storage.local
+			.set({ [key]: value })
+			.catch((err) => {
+				console.error(err);
+			})
+			.then(() => {
+				console.log(`DatabaseService.set: ${key} =`, JSON.parse(value));
+			});
 	}
 
-	public get(key: string): string | undefined {
-		let rslt = "";
-		chrome.storage.local.get(key).then((data) => {
-			rslt = data[key];
-			console.log(`DatabaseService.get: ${key} =`);
-			console.log(JSON.parse(rslt));
+	public async get(key: string): Promise<string | undefined> {
+		return await chrome.storage.local.get([key]).then((result) => {
+			const rslt = result[key];
+			console.log(`DatabaseService.get: ${key} =`, JSON.parse(rslt));
+			return rslt;
 		});
-
-		Helper.sleepSync(500);
-		return rslt;
 	}
 
 	public update(key: string, value: string): void {
@@ -37,9 +38,15 @@ export class DatabaseService {
 		console.log(JSON.parse(value));
 	}
 
-	public delete(key: string): void {
-		chrome.storage.local.remove([key]);
-		console.log(`DatabaseService.delete: `);
-		console.log(JSON.parse(key));
+	public async delete(key: string): Promise<void> {
+		return chrome.storage.local
+			.remove([key])
+			.catch((err) => {
+				console.error(err);
+			})
+			.then(() => {
+				console.log(`DatabaseService.delete: ${key}`);
+				return;
+			});
 	}
 }

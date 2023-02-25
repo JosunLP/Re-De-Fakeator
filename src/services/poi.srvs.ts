@@ -16,7 +16,7 @@ export class PoiService {
 	}
 
 	public getPOIs(): POI[] {
-		return this.session.config.POIs;
+		return SessionService.getPois();
 	}
 
 	public getPOIById(id: string): POI | null {
@@ -30,41 +30,41 @@ export class PoiService {
 	}
 
 	public setPOIs(POIs: POI[]) {
-		const config = this.session.config;
+		const config = SessionService.getConfig();
 		if (config) {
-			this.session.config.POIs = POIs;
+			SessionService.setPois(POIs);
 		}
 		SessionService.save();
 		SessionService.reloadSession();
 	}
 
 	public addPOI(POI: POI) {
-		const config = this.session.config;
+		const config = SessionService.getConfig();
 		if (config) {
-			this.session.config.POIs.push(POI);
+			SessionService.setPois([...this.getPOIs(), POI]);
 		}
 		SessionService.save();
 		SessionService.reloadSession();
 	}
 
 	public removePOI(id: string) {
-		const config = this.session.config;
+		const config = SessionService.getConfig();
 		if (config) {
-			const POIs = this.session.config.POIs;
+			const POIs = SessionService.getPois();
 			for (let i = 0; i < POIs.length; i++) {
 				if (POIs[i].id === id) {
 					POIs.splice(i, 1);
 					break;
 				}
 			}
-			this.session.config.POIs = POIs;
+			SessionService.setPois(POIs);
 		}
 		SessionService.save();
 		SessionService.reloadSession();
 	}
 
 	public updatePOI(POI: POI) {
-		const config = this.session.config;
+		const config = SessionService.getConfig();
 		if (config) {
 			const POIs = config.POIs;
 			for (let i = 0; i < POIs.length; i++) {
@@ -73,7 +73,7 @@ export class PoiService {
 					break;
 				}
 			}
-			this.session.config.POIs = POIs;
+			SessionService.setPois(POIs);
 		}
 		SessionService.save();
 		SessionService.reloadSession();
@@ -88,7 +88,7 @@ export class PoiService {
 		};
 	}
 
-	removeDescriptionVariation(value: POI, descriptionVariant: string) {
+	public removeDescriptionVariation(value: POI, descriptionVariant: string) {
 		const POIs = this.getPOIs();
 		const POI = this.getPOIById(value.id);
 		if (POI) {
@@ -101,7 +101,7 @@ export class PoiService {
 		SessionService.reloadSession();
 	}
 
-	removeNameVariation(value: POI, nameVariant: string) {
+	public removeNameVariation(value: POI, nameVariant: string) {
 		const POIs = this.getPOIs();
 		const POI = this.getPOIById(value.id);
 		if (POI) {
