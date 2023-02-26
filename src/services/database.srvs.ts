@@ -34,8 +34,7 @@ export class DatabaseService {
 	public update(key: string, value: string): void {
 		chrome.storage.local.remove([key]);
 		chrome.storage.local.set({ [key]: value });
-		console.log(`DatabaseService.update: ${key} =`);
-		console.log(JSON.parse(value));
+		console.log(`DatabaseService.update: ${key} =`, JSON.parse(value));
 	}
 
 	public async delete(key: string): Promise<void> {

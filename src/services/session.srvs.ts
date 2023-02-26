@@ -7,7 +7,7 @@ export class SessionService {
 	private static instance: SessionService;
 	private static db = DatabaseService.getInstance();
 
-	private config: RunntimeConfig;
+	public config: RunntimeConfig;
 
 	public sessionId: string = crypto.randomUUID();
 
@@ -30,31 +30,26 @@ export class SessionService {
 			.catch((err) => {
 				console.error(err);
 			})
-			.then(() => {
-				SessionService.instance = this;
-				SessionService.save();
-			});
 	}
 
 	static getInstance(): SessionService {
-		if (!SessionService.instance && !SessionService.load()) {
+		const session = SessionService.load();
+		if (!SessionService.instance && !session) {
 			SessionService.instance = new SessionService();
 		}
-		if (!SessionService.instance && SessionService.load()) {
-			SessionService.instance = <SessionService>SessionService.load();
+		if (!SessionService.instance && session) {
+			SessionService.instance = <SessionService>session;
 		}
 
-		Helper.sleepSync(300);
 		return SessionService.instance;
 	}
 
-	public static async save(): Promise<void> {
-		return await this.db.set(Helper.configPath, JSON.stringify(SessionService.instance));
+	public static async save(instance: SessionService): Promise<void> {
+		return await this.db.set(Helper.configPath, JSON.stringify(instance));
 	}
 
 	public static load(): SessionService | null {
 		SessionService.reloadSession();
-		Helper.sleep(300);
 
 		if (SessionService.instance) {
 			return SessionService.instance;
@@ -76,25 +71,7 @@ export class SessionService {
 	public static async resetSession(): Promise<void> {
 		await this.db.delete(Helper.configPath);
 		SessionService.instance = new SessionService();
-		SessionService.save();
+		SessionService.save(SessionService.instance);
 		location.reload();
-	}
-
-	public static setConfig(config: RunntimeConfig): void {
-		SessionService.instance.config = config;
-		SessionService.save();
-	}
-
-	public static getConfig(): RunntimeConfig {
-		return SessionService.instance.config;
-	}
-
-	public static getPois(): RunntimeConfig["POIs"] {
-		return SessionService.instance.config.POIs;
-	}
-
-	public static setPois(pois: RunntimeConfig["POIs"]): void {
-		SessionService.instance.config.POIs = pois;
-		SessionService.save();
 	}
 }

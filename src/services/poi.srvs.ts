@@ -4,9 +4,9 @@ import { SessionService } from "./session.srvs";
 export class PoiService {
 	private static instance: PoiService;
 
-	private constructor() {}
-
 	private session = SessionService.getInstance();
+
+	private constructor() {}
 
 	public static getInstance() {
 		if (!PoiService.instance) {
@@ -16,7 +16,7 @@ export class PoiService {
 	}
 
 	public getPOIs(): POI[] {
-		return SessionService.getPois();
+		return this.session.config.POIs;
 	}
 
 	public getPOIById(id: string): POI | null {
@@ -30,53 +30,49 @@ export class PoiService {
 	}
 
 	public setPOIs(POIs: POI[]) {
-		const config = SessionService.getConfig();
+		const config = this.session.config;
 		if (config) {
-			SessionService.setPois(POIs);
+			this.session.config.POIs = POIs;
 		}
-		SessionService.save();
+		SessionService.save(this.session);
 		SessionService.reloadSession();
 	}
 
 	public addPOI(POI: POI) {
-		const config = SessionService.getConfig();
+		const config = this.session.config;
 		if (config) {
-			SessionService.setPois([...this.getPOIs(), POI]);
+			this.session.config.POIs.push(POI);
 		}
-		SessionService.save();
+		SessionService.save(this.session);
 		SessionService.reloadSession();
 	}
 
 	public removePOI(id: string) {
-		const config = SessionService.getConfig();
+		const config = this.session.config;
 		if (config) {
-			const POIs = SessionService.getPois();
+			const POIs = this.session.config.POIs;
 			for (let i = 0; i < POIs.length; i++) {
 				if (POIs[i].id === id) {
 					POIs.splice(i, 1);
 					break;
 				}
 			}
-			SessionService.setPois(POIs);
+			this.setPOIs(POIs);
 		}
-		SessionService.save();
-		SessionService.reloadSession();
 	}
 
 	public updatePOI(POI: POI) {
-		const config = SessionService.getConfig();
+		const config = this.session.config;
 		if (config) {
-			const POIs = config.POIs;
+			const POIs = this.session.config.POIs;
 			for (let i = 0; i < POIs.length; i++) {
 				if (POIs[i].id === POI.id) {
 					POIs[i] = POI;
 					break;
 				}
 			}
-			SessionService.setPois(POIs);
+			this.setPOIs(POIs);
 		}
-		SessionService.save();
-		SessionService.reloadSession();
 	}
 
 	public createPOI(): POI {
@@ -97,8 +93,6 @@ export class PoiService {
 			);
 			this.setPOIs(POIs);
 		}
-		SessionService.save();
-		SessionService.reloadSession();
 	}
 
 	public removeNameVariation(value: POI, nameVariant: string) {
@@ -110,7 +104,5 @@ export class PoiService {
 			);
 			this.setPOIs(POIs);
 		}
-		SessionService.save();
-		SessionService.reloadSession();
 	}
 }
