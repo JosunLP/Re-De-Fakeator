@@ -50,6 +50,7 @@ export class SessionService {
 
 	public static load(): SessionService | null {
 		SessionService.reloadSession();
+		Helper.sleepSync(100);
 
 		if (SessionService.instance) {
 			return SessionService.instance;

@@ -35,7 +35,7 @@ export class PoiService {
 			this.session.config.POIs = POIs;
 		}
 		SessionService.save(this.session);
-		SessionService.reloadSession();
+		this.session = <SessionService>SessionService.load();
 	}
 
 	public addPOI(POI: POI) {
