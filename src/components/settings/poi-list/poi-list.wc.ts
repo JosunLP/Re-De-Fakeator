@@ -3,6 +3,7 @@ import { POI } from "../../../types/poi.type";
 import { IWebComponent } from "../../../interfaces/wc.interface";
 import { RouterService } from "../../../services/router.srvs";
 import { Helper } from "../../../classes/helper";
+import { SessionService } from "../../../services/session.srvs";
 
 export class PoiList extends HTMLElement implements IWebComponent {
 	router = RouterService.getInstance();
@@ -59,6 +60,7 @@ export class PoiList extends HTMLElement implements IWebComponent {
 		const list = this.shadowRoot.querySelector(".poi-list__list");
 		if (list) {
 			list.innerHTML = "";
+			SessionService.reloadSession();
 			const poiList = this.getPoiList();
 			poiList.forEach((poi) => {
 				const listItem = document.createElement("li");

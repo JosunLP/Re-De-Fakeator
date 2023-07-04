@@ -1,13 +1,29 @@
 import { POI } from "../types/poi.type";
 import { SessionService } from "./session.srvs";
 
+/**
+ * Poi service
+ */
 export class PoiService {
+	/**
+	 * Instance  of poi service
+	 */
 	private static instance: PoiService;
 
+	/**
+	 * Session  of poi service
+	 */
 	private session = SessionService.getInstance();
 
+	/**
+	 * Creates an instance of poi service.
+	 */
 	private constructor() {}
 
+	/**
+	 * Gets instance
+	 * @returns
+	 */
 	public static getInstance() {
 		if (!PoiService.instance) {
 			PoiService.instance = new PoiService();
@@ -15,10 +31,24 @@ export class PoiService {
 		return PoiService.instance;
 	}
 
+	/**
+	 * Gets pois
+	 * @returns pois
+	 */
 	public getPOIs(): POI[] {
-		return this.session.config.POIs;
+		SessionService.reloadSession();
+		const config = this.session.config;
+		if (config) {
+			return config.POIs;
+		}
+		return [];
 	}
 
+	/**
+	 * Gets poiby id
+	 * @param id
+	 * @returns poiby id
+	 */
 	public getPOIById(id: string): POI | null {
 		const POIs = this.getPOIs();
 		for (let i = 0; i < POIs.length; i++) {
@@ -29,7 +59,12 @@ export class PoiService {
 		return null;
 	}
 
+	/**
+	 * Sets pois
+	 * @param POIs
+	 */
 	public setPOIs(POIs: POI[]) {
+		SessionService.reloadSession();
 		const config = this.session.config;
 		if (config) {
 			this.session.config.POIs = POIs;
@@ -38,7 +73,12 @@ export class PoiService {
 		this.session = <SessionService>SessionService.load();
 	}
 
+	/**
+	 * Adds poi
+	 * @param POI
+	 */
 	public addPOI(POI: POI) {
+		SessionService.reloadSession();
 		const config = this.session.config;
 		if (config) {
 			this.session.config.POIs.push(POI);
@@ -47,7 +87,12 @@ export class PoiService {
 		SessionService.reloadSession();
 	}
 
+	/**
+	 * Removes poi
+	 * @param id
+	 */
 	public removePOI(id: string) {
+		SessionService.reloadSession();
 		const config = this.session.config;
 		if (config) {
 			const POIs = this.session.config.POIs;
@@ -61,7 +106,12 @@ export class PoiService {
 		}
 	}
 
+	/**
+	 * Updates poi
+	 * @param POI
+	 */
 	public updatePOI(POI: POI) {
+		SessionService.reloadSession();
 		const config = this.session.config;
 		if (config) {
 			const POIs = this.session.config.POIs;
@@ -75,6 +125,10 @@ export class PoiService {
 		}
 	}
 
+	/**
+	 * Creates poi
+	 * @returns poi
+	 */
 	public createPOI(): POI {
 		return {
 			id: crypto.randomUUID(),
@@ -84,6 +138,11 @@ export class PoiService {
 		};
 	}
 
+	/**
+	 * Removes description variation
+	 * @param value
+	 * @param descriptionVariant
+	 */
 	public removeDescriptionVariation(value: POI, descriptionVariant: string) {
 		const POIs = this.getPOIs();
 		const POI = this.getPOIById(value.id);
@@ -95,6 +154,11 @@ export class PoiService {
 		}
 	}
 
+	/**
+	 * Removes name variation
+	 * @param value
+	 * @param nameVariant
+	 */
 	public removeNameVariation(value: POI, nameVariant: string) {
 		const POIs = this.getPOIs();
 		const POI = this.getPOIById(value.id);

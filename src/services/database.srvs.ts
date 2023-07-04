@@ -1,10 +1,21 @@
-import { Helper } from "../classes/helper";
-
+/**
+ * Database service
+ */
 export class DatabaseService {
+	/**
+	 * Instance  of database service
+	 */
 	private static instance: DatabaseService;
 
+	/**
+	 * Creates an instance of database service.
+	 */
 	private constructor() {}
 
+	/**
+	 * Gets instance
+	 * @returns instance
+	 */
 	public static getInstance(): DatabaseService {
 		if (!DatabaseService.instance) {
 			DatabaseService.instance = new DatabaseService();
@@ -12,40 +23,85 @@ export class DatabaseService {
 		return DatabaseService.instance;
 	}
 
-	public async set(key: string, value: string): Promise<void> {
-		return chrome.storage.local
-			.set({ [key]: value })
-			.catch((err) => {
-				console.error(err);
-			})
-			.then(() => {
-				console.log(`DatabaseService.set: ${key} =`, JSON.parse(value));
-			});
-	}
+	/**
+	 * Sets database service
+	 * @param key
+	 * @param value
+	 * @returns set
+	 */
+	public set(key: string, value: string): Promise<void> {
+		return new Promise((resolve, reject) => {
+			const result = localStorage.getItem(key);
 
-	public async get(key: string): Promise<string | undefined> {
-		return await chrome.storage.local.get([key]).then((result) => {
-			const rslt = result[key];
-			console.log(`DatabaseService.get: ${key} =`, JSON.parse(rslt));
-			return rslt;
+			if (result) {
+				return reject(`DatabaseService.set: ${key} already exists`);
+			} else {
+				localStorage.setItem(key, value);
+				console.log(`DatabaseService.set: ${key} =`, JSON.parse(value));
+				return resolve();
+			}
 		});
 	}
 
-	public update(key: string, value: string): void {
-		chrome.storage.local.remove([key]);
-		chrome.storage.local.set({ [key]: value });
-		console.log(`DatabaseService.update: ${key} =`, JSON.parse(value));
+	/**
+	 * Gets database service
+	 * @param key
+	 * @returns get
+	 */
+	public get(key: string): Promise<string | undefined> {
+		const result = localStorage.getItem(key);
+
+		if (result) {
+			console.log(`DatabaseService.get: ${key} =`, JSON.parse(result));
+			return Promise.resolve(result);
+		}
+
+		return Promise.resolve(undefined);
 	}
 
-	public async delete(key: string): Promise<void> {
-		return chrome.storage.local
-			.remove([key])
-			.catch((err) => {
-				console.error(err);
-			})
-			.then(() => {
-				console.log(`DatabaseService.delete: ${key}`);
-				return;
-			});
+	/**
+	 * Updates database service
+	 * @param key
+	 * @param value
+	 * @returns update
+	 */
+	public update(key: string, value: string): Promise<void> {
+		return new Promise((resolve, reject) => {
+			const result = localStorage.getItem(key);
+
+			if (result) {
+				localStorage.removeItem(key);
+				console.log(
+					`DatabaseService.update: ${key} =`,
+					JSON.parse(value)
+				);
+
+				return resolve(this.set(key, value));
+			} else {
+				return reject(`DatabaseService.update: ${key} not found`);
+			}
+		});
+	}
+
+	/**
+	 * Deletes database service
+	 * @param key
+	 * @returns delete
+	 */
+	public delete(key: string): Promise<void> {
+		return new Promise((resolve, reject) => {
+			const result = localStorage.getItem(key);
+
+			if (result) {
+				localStorage.removeItem(key);
+				console.log(
+					`DatabaseService.delete: ${key} =`,
+					JSON.parse(result)
+				);
+				return resolve();
+			} else {
+				return reject(`DatabaseService.delete: ${key} not found`);
+			}
+		});
 	}
 }
