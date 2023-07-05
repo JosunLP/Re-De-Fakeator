@@ -20,6 +20,10 @@
             }
         ]
     },
+    "BuildData":{
+        "DEPLOY_ENTRY": "./public/",
+        "DEPLOY_TARGET": "./dist/"
+    },
     "htmlTemplatePairs": [
         {
             "key": "{{BET}}",

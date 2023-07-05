@@ -1,22 +1,9 @@
 import * as fs from 'fs';
 import * as path from 'path';
+import { rimrafSync } from 'rimraf';
 const appConfig = JSON.parse(fs.readFileSync('./app.config.json', 'utf8'));
-const DEPLOY_ENTRY = "./public/";
-const DEPLOY_TARGET = "./dist/";
-
-function deleteFolderRecursive(path: string) {
-  if (fs.existsSync(path)) {
-    fs.readdirSync(path).forEach(function (file: string) {
-      const curPath = path + "/" + file;
-      if (fs.lstatSync(curPath).isDirectory()) {
-        deleteFolderRecursive(curPath);
-      } else {
-        fs.unlinkSync(curPath);
-      }
-    });
-    fs.rmdirSync(path);
-  }
-}
+const DEPLOY_ENTRY = appConfig.BuildData.DEPLOY_ENTRY;
+const DEPLOY_TARGET = appConfig.BuildData.DEPLOY_TARGET;
 
 function findHtmlFilesRecursive(source: string): string[] {
   let files: string[] = [];
@@ -76,7 +63,9 @@ function copyFiles(source: string, target: string) {
   });
 }
 
-deleteFolderRecursive(DEPLOY_TARGET);
+// deleteFolderRecursive(DEPLOY_TARGET);
+
+rimrafSync(DEPLOY_TARGET);
 mkdirSync(DEPLOY_TARGET);
 copyFiles(DEPLOY_ENTRY, DEPLOY_TARGET);
 buildHtmlFiles(DEPLOY_ENTRY);
