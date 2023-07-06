@@ -1,3 +1,5 @@
+import { Session } from "../types/session.type";
+
 /**
  * Database service
  */
@@ -29,15 +31,20 @@ export class DatabaseService {
 	 * @param value
 	 * @returns set
 	 */
-	public set(key: string, value: string): void {
+	public async set(key: string, value: Session): Promise<void> {
 
-		chrome.storage.local.get(key, (result) => {
-			console.warn(`DatabaseService.set: ${key} already exists`);
-			chrome.storage.local.remove(key);
-			chrome.storage.local.set({ key: value }).then(() => {
-				console.log(`DatabaseService.set: ${key} =`, JSON.parse(value));
+		chrome.storage.local.get(key, async (result) => {
+			if (result) {
+				console.warn(`DatabaseService.set: ${key} already exists`);
+				await chrome.storage.local.remove(key);
+				await chrome.storage.local.set({ key: value }).then(() => {
+					console.log(`DatabaseService.set: ${key} =`, value);
+				});
+			} else {
+				await chrome.storage.local.set({ key: value }).then(() => {
+					console.log(`DatabaseService.set: ${key} =`, value);
+				});
 			}
-			);
 		});
 	}
 
@@ -46,10 +53,10 @@ export class DatabaseService {
 	 * @param key
 	 * @returns get
 	 */
-	public get(key: string): string | null {
-		const result = chrome.storage.local.get(key) as unknown as string;
+	public async get(key: string): Promise<Session | null> {
+		const result = await chrome.storage.local.get(key) as unknown as Session;
 		if (result) {
-			console.log(`DatabaseService.get: ${key} =`, JSON.parse(result));
+			console.log(`DatabaseService.get: ${key} =`, result);
 			return result;
 		} else {
 			console.warn(`DatabaseService.get: ${key} not found`);
@@ -63,12 +70,12 @@ export class DatabaseService {
 	 * @param value
 	 * @returns update
 	 */
-	public update(key: string, value: string): void {
-		chrome.storage.local.get(key, (result) => {
+	public async update(key: string, value: Session): Promise<void> {
+		chrome.storage.local.get(key, async (result) => {
 			if (result) {
-				chrome.storage.local.remove(key);
-				chrome.storage.local.set({ key: value }).then(() => {
-					console.log(`DatabaseService.update: ${key} =`, JSON.parse(value));
+				await chrome.storage.local.remove(key);
+				await chrome.storage.local.set({ key: value }).then(() => {
+					console.log(`DatabaseService.update: ${key} =`, value);
 				});
 			} else {
 				console.warn(`DatabaseService.update: ${key} not found`);
@@ -81,10 +88,10 @@ export class DatabaseService {
 	 * @param key
 	 * @returns delete
 	 */
-	public delete(key: string): void{
-		chrome.storage.local.get(key, (result) => {
+	public async delete(key: string): Promise<void> {
+		chrome.storage.local.get(key, async (result) => {
 			if (result) {
-				chrome.storage.local.remove(key);
+				await chrome.storage.local.remove(key);
 				console.log(`DatabaseService.delete: ${key} deleted`);
 			} else {
 				console.warn(`DatabaseService.delete: ${key} not found`);

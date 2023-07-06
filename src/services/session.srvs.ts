@@ -24,12 +24,13 @@ export class SessionService {
 	/**
 	 * Session id of session service
 	 */
-	public sessionId: string = crypto.randomUUID();
+	public sessionId: string;
 
 	/**
 	 * Creates an instance of session service.
 	 */
-	private constructor() {
+	private constructor(
+	) {
 		this.config = {
 			POIs: [
 				{
@@ -40,6 +41,8 @@ export class SessionService {
 				},
 			],
 		};
+
+		this.sessionId = crypto.randomUUID();
 
 		FileHandler.readFileAsync(Helper.configPath)
 			.then((data) => {
@@ -76,12 +79,12 @@ export class SessionService {
 	 * @param instance
 	 * @returns save
 	 */
-	public static save(instance: SessionService): void {
-		const session = SessionService.db.get(Helper.configPath);
-		if (session) {
-			SessionService.db.update(Helper.configPath, JSON.stringify(instance));
+	public static async save(instance: SessionService): Promise<void> {
+		const session = await SessionService.db.get(Helper.configPath);
+		if (session !== null) {
+			await SessionService.db.update(Helper.configPath, { config: instance.config, sessionId: instance.sessionId });
 		} else {
-			SessionService.db.set(Helper.configPath, JSON.stringify(instance));
+			await SessionService.db.set(Helper.configPath, { config: instance.config, sessionId: instance.sessionId });
 		}
 		return;
 	}
@@ -90,12 +93,12 @@ export class SessionService {
 	 * Reloads session
 	 * @returns session
 	 */
-	public static reloadSession(): void {
-		const session = SessionService.db.get(Helper.configPath);
-		if (session) {
+	public static async reloadSession(): Promise<void> {
+		const session = await SessionService.db.get(Helper.configPath);
+		if (session !== null) {
 			const result = new SessionService();
-			result.config = (<SessionService>JSON.parse(session)).config;
-			result.sessionId = (<SessionService>JSON.parse(session)).sessionId;
+			result.config = session.config;
+			result.sessionId = session.sessionId;
 			SessionService.setInstance(result);
 		}
 	}
@@ -105,9 +108,9 @@ export class SessionService {
 	 * @returns session
 	 */
 	public static async resetSession(): Promise<void> {
-		SessionService.db.delete(Helper.configPath);
+		await SessionService.db.delete(Helper.configPath);
 		SessionService.setInstance(new SessionService());
-		SessionService.save(SessionService._instance);
+		await SessionService.save(SessionService._instance);
 		location.reload();
 	}
 }

@@ -65,12 +65,14 @@ export class PoiService {
 	 */
 	public setPOIs(POIs: POI[]) {
 		SessionService.reloadSession();
+		this.session = <SessionService>SessionService.getInstance();
 		const config = this.session.config;
 		if (config) {
 			this.session.config.POIs = POIs;
 		}
 		SessionService.save(this.session);
-		this.session = <SessionService>SessionService.load();
+		SessionService.reloadSession();
+		this.session = <SessionService>SessionService.getInstance();
 	}
 
 	/**
@@ -79,8 +81,9 @@ export class PoiService {
 	 */
 	public addPOI(POI: POI) {
 		SessionService.reloadSession();
-		const config = this.session.config;
-		if (config) {
+		this.session = <SessionService>SessionService.getInstance();
+		if (this.session.config) {
+			console.log(this.session);
 			this.session.config.POIs.push(POI);
 		}
 		SessionService.save(this.session);
@@ -93,6 +96,7 @@ export class PoiService {
 	 */
 	public removePOI(id: string) {
 		SessionService.reloadSession();
+		this.session = <SessionService>SessionService.getInstance();
 		const config = this.session.config;
 		if (config) {
 			const POIs = this.session.config.POIs;
@@ -104,6 +108,8 @@ export class PoiService {
 			}
 			this.setPOIs(POIs);
 		}
+		SessionService.save(this.session);
+		SessionService.reloadSession();
 	}
 
 	/**
@@ -112,6 +118,7 @@ export class PoiService {
 	 */
 	public updatePOI(POI: POI) {
 		SessionService.reloadSession();
+		this.session = <SessionService>SessionService.getInstance();
 		const config = this.session.config;
 		if (config) {
 			const POIs = this.session.config.POIs;
@@ -123,6 +130,8 @@ export class PoiService {
 			}
 			this.setPOIs(POIs);
 		}
+		SessionService.save(this.session);
+		SessionService.reloadSession();
 	}
 
 	/**
