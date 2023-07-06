@@ -29,17 +29,15 @@ export class DatabaseService {
 	 * @param value
 	 * @returns set
 	 */
-	public set(key: string, value: string): Promise<void> {
-		return new Promise((resolve, reject) => {
-			const result = localStorage.getItem(key);
+	public set(key: string, value: string): void {
 
-			if (result) {
-				return reject(`DatabaseService.set: ${key} already exists`);
-			} else {
-				localStorage.setItem(key, value);
+		chrome.storage.local.get(key, (result) => {
+			console.warn(`DatabaseService.set: ${key} already exists`);
+			chrome.storage.local.remove(key);
+			chrome.storage.local.set({ key: value }).then(() => {
 				console.log(`DatabaseService.set: ${key} =`, JSON.parse(value));
-				return resolve();
 			}
+			);
 		});
 	}
 
@@ -48,15 +46,15 @@ export class DatabaseService {
 	 * @param key
 	 * @returns get
 	 */
-	public get(key: string): Promise<string | undefined> {
-		const result = localStorage.getItem(key);
-
+	public get(key: string): string | null {
+		const result = chrome.storage.local.get(key) as unknown as string;
 		if (result) {
 			console.log(`DatabaseService.get: ${key} =`, JSON.parse(result));
-			return Promise.resolve(result);
+			return result;
+		} else {
+			console.warn(`DatabaseService.get: ${key} not found`);
+			return null;
 		}
-
-		return Promise.resolve(undefined);
 	}
 
 	/**
@@ -65,20 +63,15 @@ export class DatabaseService {
 	 * @param value
 	 * @returns update
 	 */
-	public update(key: string, value: string): Promise<void> {
-		return new Promise((resolve, reject) => {
-			const result = localStorage.getItem(key);
-
+	public update(key: string, value: string): void {
+		chrome.storage.local.get(key, (result) => {
 			if (result) {
-				localStorage.removeItem(key);
-				console.log(
-					`DatabaseService.update: ${key} =`,
-					JSON.parse(value)
-				);
-
-				return resolve(this.set(key, value));
+				chrome.storage.local.remove(key);
+				chrome.storage.local.set({ key: value }).then(() => {
+					console.log(`DatabaseService.update: ${key} =`, JSON.parse(value));
+				});
 			} else {
-				return reject(`DatabaseService.update: ${key} not found`);
+				console.warn(`DatabaseService.update: ${key} not found`);
 			}
 		});
 	}
@@ -88,19 +81,13 @@ export class DatabaseService {
 	 * @param key
 	 * @returns delete
 	 */
-	public delete(key: string): Promise<void> {
-		return new Promise((resolve, reject) => {
-			const result = localStorage.getItem(key);
-
+	public delete(key: string): void{
+		chrome.storage.local.get(key, (result) => {
 			if (result) {
-				localStorage.removeItem(key);
-				console.log(
-					`DatabaseService.delete: ${key} =`,
-					JSON.parse(result)
-				);
-				return resolve();
+				chrome.storage.local.remove(key);
+				console.log(`DatabaseService.delete: ${key} deleted`);
 			} else {
-				return reject(`DatabaseService.delete: ${key} not found`);
+				console.warn(`DatabaseService.delete: ${key} not found`);
 			}
 		});
 	}
